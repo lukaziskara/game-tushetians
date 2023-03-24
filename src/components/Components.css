@@ -8,13 +8,6 @@
     display: flex;
     justify-content: space-between;
 }
-.dictionary{
-}
-.word{
-    background-color: green;
-    margin: 5px;
-}
-
 .flex_wrap {
     display: flex;
     flex-wrap: wrap;
@@ -34,19 +27,43 @@
     
 }
 .dictionary{
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     display: flex;
     flex-wrap: wrap;
 }
+.t_words {
+   background-color: rgb(94, 95, 94);
+   width: 70%;
+   /* height: 1em; */
+}
 .b_words {
-    background-color: rgb(58, 58, 58);
-    width: 30%;
+   background-color: rgb(94, 95, 94);
+   width: 30%;
+   /* height: 1em; */
+}
+.card{
+    width: fit-content;
+    margin: 5px;
+    cursor: pointer;
+}
+.back_card {
+    width: fit-content;
     font-size: 0.7em;
 }
- .t_words {
-    background-color: rgb(94, 95, 94);
-    width: 70%;
-    /* height: 1em; */
+.invisible_front{
+    background-color: green;
+    color: green;
+}
+.visible_front{
+    background-color: green;
+}
+.invisible_back{
+    background-color: rgb(95, 95, 95);
+    color: rgb(164, 164, 164);
+    background-color: rgb(164, 164, 164);
+}
+.visible_back{
+    background-color: grey;
 }
 .word{
     background-color: rgb(255, 255, 255);

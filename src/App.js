@@ -1,21 +1,23 @@
-import { useState } from 'react';
-import './App.css';
+// import { useState } from 'react';
+// import './App.css';
 import Chapter from './components/Chapter'
 import tushetians from './tushetians_new.json';
 // console.log(tushetians);
 
 function App() {
-  // const [openChapter, setOpenChapter] = useState(0);
   return (
     <div className="App">
-      {/* <div id='stars'></div>
-                <div id='stars2'></div>
-                <div id='stars3'></div> */}
-      {tushetians.map((chapter, index) =>
-        <Chapter key={index} value={chapter} />
-      )}
+      {tushetians.map((chapter, index) => {
+        const randomSentences = []
+        for(let i = 0; i < 4; i++) {
+          const randomNumber = Math.floor(Math.random() * chapter.sentences.length);
+          randomSentences.push(chapter.sentences[randomNumber]);
+          chapter.sentences.splice(randomNumber,1)
+        }
+        // console.log(index,"chapter", chapter.topic,randomSentences)
+        return <Chapter key={index} index={index} topic={chapter.topic} value={randomSentences} />
+      })}
     </div>
- 
   );
 }
 
