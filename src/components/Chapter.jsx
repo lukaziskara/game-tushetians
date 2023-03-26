@@ -4,18 +4,20 @@ import Dictionary from './Dictionary';
 import WordsAndMarks from './WordsAndMarks';
 
 export default function Chapter(props) {
+    const [point, setPoint] = useState(0)
+    const [tries, setTries] = useState(0)
     const sentences = props.value;
     // const chapterIndex = props.index;
     // console.log(sentences,chapterIndex);
     const [openedGame, setOpenedGame] = useState(0);
-    console.log(openedGame)
-    // console.log(props.topic, props.value,sentences)
+    // console.log(openedGame)
+    // console.log(props)
     // const cardsData = [];
     const words = [];
     const tWords = [];
     //
     for (let i = 0; i < sentences.length; i++) {
-        console.log(i, "i");
+        // console.log(i, "i");
         const randomNumber = Math.floor(Math.random() * sentences.length);
         const sentence = sentences[randomNumber].sentence;
         const translation = sentences[randomNumber].translation;
@@ -38,7 +40,7 @@ export default function Chapter(props) {
                     newWord.push(signsArray[i]);
 
         }
-        console.log(tWords)
+        // console.log(tWords)
         if (tWords[index]) {
             const trSignsArray = tWords[index].split("");
             for (let i = 0; i < trSignsArray.length; i++) {
@@ -60,7 +62,7 @@ export default function Chapter(props) {
             return console.log(index, "სიტყვა არ მოიძებნა")
         }
     })
-    console.log(wordsForCards);
+    // console.log(wordsForCards);
 
     //     const tSignsArray = tWords[index].split("");
     //     for (let i = 0; i < tSignsArray.length; i++) {
@@ -93,11 +95,11 @@ export default function Chapter(props) {
     return (
         <div className="chapter">
             <div className='topic-div'>
-
                 <button onClick={() => {
                     setOpenedGame(!openedGame)
                 }}>გახსნა/დახურვა</button>
-                <h2>{props.value.topic}</h2>
+                <h2>{props.topic}</h2>
+                <div>{point}/{tries}</div>
                 <div>
                     <button onClick={() => {
                         setOpenedGame(1)
@@ -111,6 +113,10 @@ export default function Chapter(props) {
             <div>
                 {
                     (openedGame === 1) ? <Dictionary
+                        point={point}
+                        setPoint={setPoint}
+                        tries={tries}
+                        setTries={setTries}
                         cardsData={wordsForCards}
                     />
                         : (openedGame === 2) ? <WordsAndMarks
