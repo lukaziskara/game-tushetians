@@ -8,7 +8,7 @@ export default function Chapter(props) {
     const [tries, setTries] = useState(0)
     const sentences = props.value;
     // const chapterIndex = props.index;
-    // console.log(sentences,chapterIndex);
+    console.log(props);
     const [openedGame, setOpenedGame] = useState(0);
     // console.log(openedGame)
     // console.log(props)
@@ -62,7 +62,7 @@ export default function Chapter(props) {
             return console.log(index, "სიტყვა არ მოიძებნა")
         }
     })
-    // console.log(wordsForCards);
+    console.log(wordsForCards);
 
     //     const tSignsArray = tWords[index].split("");
     //     for (let i = 0; i < tSignsArray.length; i++) {

@@ -1,5 +1,5 @@
 // import { useState } from 'react';
-// import './App.css';
+import './App.css';
 import Chapter from './components/Chapter'
 import tushetians from './tushetians_new.json';
 // console.log(tushetians);
