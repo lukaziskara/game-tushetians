@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import './Components.css';
 import Dictionary from './Dictionary';
 import WordsAndMarks from './WordsAndMarks';
@@ -6,64 +6,73 @@ import WordsAndMarks from './WordsAndMarks';
 export default function Chapter(props) {
     const [point, setPoint] = useState(0)
     const [tries, setTries] = useState(0)
-    const sentences = props.value;
     // const chapterIndex = props.index;
     console.log(props);
     const [openedGame, setOpenedGame] = useState(0);
     // console.log(openedGame)
     // console.log(props)
     // const cardsData = [];
-    const words = [];
-    const tWords = [];
-    //
-    for (let i = 0; i < sentences.length; i++) {
-        // console.log(i, "i");
-        const randomNumber = Math.floor(Math.random() * sentences.length);
-        const sentence = sentences[randomNumber].sentence;
-        const translation = sentences[randomNumber].translation;
-        words.push(...sentence.split(' '));
-        tWords.push(...translation.split(' '));
-        // console.log("dwadfegf",sentences[i].sentence.length,sentences[i].translation.length,sentences);
-    }
-    const marks = [",", ".", ":", ";", "!", "?"];
-    const wordsForCards = words.map((value, index) => {
-        const newWord = [];
-        const newTrWord = [];
-        let bPunctMark;
-        let tPunctMark;
-        const signsArray = words[index].split("");
-        for (let i = 0; i < signsArray.length; i++) {
-            (signsArray[i] === "ࣿ") ?
-                newWord.push(<span className="span_element">{signsArray[i]}</span>) :
-                (marks.includes(signsArray[i])) ?
-                    bPunctMark = signsArray[i] :
-                    newWord.push(signsArray[i]);
-
+    const sentences = props.value;
+    const wordsForCards = useMemo(()=>{
+        const words = [];
+        const tWords = [];
+        //
+        for (let i = 0; i < sentences.length; i++) {
+            // console.log(i, "i");
+            const randomNumber = Math.floor(Math.random() * sentences.length);
+            const sentence = sentences[randomNumber].sentence;
+            const translation = sentences[randomNumber].translation;
+            words.push(...sentence.split(' '));
+            tWords.push(...translation.split(' '));
+            // console.log("dwadfegf",sentences[i].sentence.length,sentences[i].translation.length,sentences);
         }
-        // console.log(tWords)
-        if (tWords[index]) {
-            const trSignsArray = tWords[index].split("");
-            for (let i = 0; i < trSignsArray.length; i++) {
-                // (trSignsArray[i] === "ࣿ") ?
-                // newTrWord.push(<span className="span_element">{trSignsArray[i]}</span>) :
-                (marks.includes(trSignsArray[i])) ?
-                    bPunctMark = trSignsArray[i] :
-                    newTrWord.push(trSignsArray[i]);
-                    
+        const marks = [",", ".", ":", ";", "!", "?"];
+        const wordsForCards = words.map((value, index) => {
+            const newWord = [];
+            const newTrWord = [];
+            let bPunctMark;
+            let tPunctMark;
+            const signsArray = words[index].split("");
+            for (let i = 0; i < signsArray.length; i++) {
+                (signsArray[i] === "ࣿ") ?
+                    newWord.push(<span className="span_element">{signsArray[i]}</span>) :
+                    (marks.includes(signsArray[i])) ?
+                        bPunctMark = signsArray[i] :
+                        newWord.push(signsArray[i]);
+    
             }
-            return {
-                backText: newWord,
-                bPunctMark: (bPunctMark) ? bPunctMark : "",
-                frontText: newTrWord,
-                tPunctMark: (tPunctMark) ? tPunctMark : "",
-                id: Math.random() * Math.random
+            // console.log(tWords)
+            if (tWords[index]) {
+                const trSignsArray = tWords[index].split("");
+                for (let i = 0; i < trSignsArray.length; i++) {
+                    // (trSignsArray[i] === "ࣿ") ?
+                    // newTrWord.push(<span className="span_element">{trSignsArray[i]}</span>) :
+                    (marks.includes(trSignsArray[i])) ?
+                        bPunctMark = trSignsArray[i] :
+                        newTrWord.push(trSignsArray[i]);
+                        
+                }
+                return {
+                    backText: newWord,
+                    bPunctMark: (bPunctMark) ? bPunctMark : "",
+                    frontText: newTrWord,
+                    tPunctMark: (tPunctMark) ? tPunctMark : "",
+                    id: Math.random() * Math.random
+                }
+            } else {
+                return console.log(index, "სიტყვა არ მოიძებნა")
             }
-        } else {
-            return console.log(index, "სიტყვა არ მოიძებნა")
-        }
-    })
-    console.log(wordsForCards);
+        })
+        console.log(wordsForCards);
 
+        console.log("useMemo", point,tries)
+        return wordsForCards
+    },[])
+    // console.log(tak)
+    const takeSe = useCallback(()=>{
+        console.log("callBack", point,tries)
+    },[])
+    takeSe()
     //     const tSignsArray = tWords[index].split("");
     //     for (let i = 0; i < tSignsArray.length; i++) {
     //         (tSignsArray[i] === "ࣿ") ?
