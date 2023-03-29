@@ -6,7 +6,7 @@ import React from "react";
 
 
 export default function Dictionary(props) { //[point,setPoint,tries,setTries,cardsData]
-    // console.log(props)
+    // console.log(props.setPoint)
     // let Points = 0;
     // let tries = 0;
     const leftBack = useRef()
@@ -33,7 +33,7 @@ export default function Dictionary(props) { //[point,setPoint,tries,setTries,car
     const [clickedLeftCard, setClickedLeftCard ] = useState();
     const [isVisibleBack, setIsVisibleBack ] = useState();
     const [visibleBackIndex, setVisibleBackIndex ] = useState();
-    console.log(leftBack,rightBack,cardsData)
+    // console.log(leftBack,rightBack,cardsData)
     // console.log(clickedRightCard)
     // function whenBackCardClicked(){
         //     setClickedCard(index)
@@ -52,15 +52,17 @@ export default function Dictionary(props) { //[point,setPoint,tries,setTries,car
                             'card left_card'}
                             onClick={()=>{
                             leftBack.current = cardData.backText
-                            console.log("შედარება L",leftBack,rightBack,"refs")
+                            // console.log("შედარება L",leftBack,rightBack,"refs")
                             if(leftBack.current===rightBack.current){
+                                props.setPoint(props.point+1)
+                                props.setTries(props.tries+1)
                                 // refPoints.current += 1;
                                 // refTries.current += 1;
-                                console.log("daemtxva","point",leftBack,"/",rightBack);
+                                // console.log("daemtxva","point",leftBack,"/",rightBack);
                                 // props.setPoint(props.point+1);
                             }else{
-                                console.log("ar daemtxva")
-                                // props.setTries(props.tries+1)
+                                // console.log("ar daemtxva")
+                                props.setTries(props.tries+1)
                             }
                             setClickedLeftCard(index+1)
                         }}>
@@ -79,7 +81,7 @@ export default function Dictionary(props) { //[point,setPoint,tries,setTries,car
                         <div className={clickedRightCard===index+1?'card clickedRight':'card right_card'} onClick={()=>{
                             setClickedRightCard(index+1)
                             rightBack.current = cardData.backText
-                            console.log(index+1,"rightBack",rightBack)
+                            // console.log(index+1,"rightBack",rightBack)
                             }}>
                             <div>
                                 <p>{cardData.backText}</p>
