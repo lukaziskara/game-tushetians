@@ -15,7 +15,6 @@ export default function Dictionary(props) { //[point,setPoint,tries,setTries,car
     const [isVisibleBack, setIsVisibleBack ] = useState();
     const [visibleBackIndex, setVisibleBackIndex ] = useState();
     const shuffledDataForLeft = useMemo(()=>{
-        console.log("Dictionary, useMemo",cardsData)
         return cardsData.map((cardData)=>{
             return {
                 frontText: cardData.frontText,
@@ -24,7 +23,6 @@ export default function Dictionary(props) { //[point,setPoint,tries,setTries,car
         }).sort(() => 0.5 - Math.random())
     },[])
     const shuffledDataForRight = useMemo(()=>{
-        console.log("Dictionary, useMemo",cardsData)
         return cardsData.map((cardData)=>{
             return {
                 backText: cardData.backText,
@@ -43,7 +41,7 @@ export default function Dictionary(props) { //[point,setPoint,tries,setTries,car
                             'card left_card'}
                             onClick={()=>{
                             leftBackId.current = cardData.id
-                            console.log(leftBackId.current,"qudqolgebi",rightBackId.current)
+                            console.log(leftBackId.current,rightBackId.current)
                             if(leftBackId.current===rightBackId.current){
                                 props.setPoint(props.point+1)
                                 props.setTries(props.tries+1)

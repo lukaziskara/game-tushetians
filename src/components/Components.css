@@ -1,14 +1,22 @@
+*{
+    margin: 0;
+    padding: 0;
+  }
 .chapter {
-    margin: .7em;
-    padding: 1em;
+    margin: 1em .1em;
+    padding: 0.7em .3em;
     background-color: rgba(49, 58, 89, 0.839);
-    box-shadow: 3px 8px 39px -5px rgba(74,74,74,0.78);
+    /* box-shadow: 3px 8px 39px -5px rgba(74,74,74,0.78); */
     border-radius: 10px;
+    width: auto;
 }
 .topic-div {
     color: #000000;
     display: flex;
     justify-content: space-between;
+}
+.topic_header {
+    font-size: 16px;
 }
 .result {
     margin: auto;
@@ -19,9 +27,9 @@ button{
     background-color: rgb(56, 102, 227);
     border: none;
     color: white;
-    border-radius: 10px;
-    padding: 0.5em;
-    margin: 1em;
+    border-radius: 3px;
+    padding: .1em;
+    margin: .1em;
     cursor: pointer;
 }
 .flex_wrap {

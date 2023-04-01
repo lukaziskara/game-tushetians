@@ -73,14 +73,14 @@ export default function Chapter(props) {
             <div className='topic-div'>
                 <button onClick={() => {
                     setOpenedGame(!openedGame)
-                }}>გახსნა/დახურვა</button>
-                <h2>{props.topic}</h2>
+                }}>გ/დ</button>
+                <h2 className='topic_header'>{props.topic}</h2>
                 <div className='result'>{point}/{tries}</div>
                 <div>
                     <button onClick={() => {
                         setOpenedGame(1)
                     }}>
-                        ლექსიკონი</button>
+                        დაშნი</button>
                     <button onClick={() => {
                         setOpenedGame(2)
                     }}>გრამატიკა</button>
