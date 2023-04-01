@@ -1,7 +1,12 @@
 export default function WordsAndMarks(props) {
     return (
-        <h1>
-            {props.age}
-        </h1>
+        <div className="sentencesGame">
+            <div>
+                წინადადებები
+            </div>
+            <div>
+                სასვენი ნიშნები
+            </div>
+        </div>
     )
 }

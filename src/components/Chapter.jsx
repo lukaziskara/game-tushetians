@@ -6,25 +6,20 @@ import WordsAndMarks from './WordsAndMarks';
 export default function Chapter(props) {
     const [point, setPoint] = useState(0)
     const [tries, setTries] = useState(0)
-    // const chapterIndex = props.index;
-    console.log(props);
+    // console.log(props);
     const [openedGame, setOpenedGame] = useState(0);
-    // console.log(openedGame)
-    // console.log(props)
-    // const cardsData = [];
     const sentences = props.value;
+
     const wordsForCards = useMemo(()=>{
         const words = [];
         const tWords = [];
         //
         for (let i = 0; i < sentences.length; i++) {
-            // console.log(i, "i");
             const randomNumber = Math.floor(Math.random() * sentences.length);
             const sentence = sentences[randomNumber].sentence;
             const translation = sentences[randomNumber].translation;
             words.push(...sentence.split(' '));
             tWords.push(...translation.split(' '));
-            // console.log("dwadfegf",sentences[i].sentence.length,sentences[i].translation.length,sentences);
         }
         const marks = [",", ".", ":", ";", "!", "?"];
         const wordsForCards = words.map((value, index) => {
@@ -41,7 +36,6 @@ export default function Chapter(props) {
                         newWord.push(signsArray[i]);
     
             }
-            // console.log(tWords)
             if (tWords[index]) {
                 const trSignsArray = tWords[index].split("");
                 for (let i = 0; i < trSignsArray.length; i++) {
@@ -57,50 +51,23 @@ export default function Chapter(props) {
                     bPunctMark: (bPunctMark) ? bPunctMark : "",
                     frontText: newTrWord,
                     tPunctMark: (tPunctMark) ? tPunctMark : "",
-                    id: Math.random() * Math.random
+                    id: Math.floor(Math.random()*1000)
                 }
             } else {
-                return console.log(index, "სიტყვა არ მოიძებნა")
+                return console.log(index, "ალექსის აინტერესებს რატომ ეწერა აქ სიტყვა არ მოიძებნაო")
             }
         })
-        console.log(wordsForCards);
+        
+        // wordsForCards.sort(() => 0.5 - Math.random())
+        // console.log(wordsForCards);
 
         console.log("useMemo", point,tries)
         return wordsForCards
     },[])
-    // console.log(tak)
-    const takeSe = useCallback(()=>{
-        console.log("callBack", point,tries)
+    const takeSe = useMemo(()=>{
+        console.log("callBack", point,tries, wordsForCards)
     },[])
-    takeSe()
-    //     const tSignsArray = tWords[index].split("");
-    //     for (let i = 0; i < tSignsArray.length; i++) {
-    //         (tSignsArray[i] === "ࣿ") ?
-    //             newTrWord.push(<span className="span_element">{signsArray[i]}</span>) :
-    //             (marks.includes(tSignsArray[i])) ?
-    //                 tPunctMark = tSignsArray[i]:
-    //                 newTrWord.push(tSignsArray[i]);
-    //     }
-    //     // console.log(newWord, "newword",newTrWord)
-    // })
-    // // for(let i=0;i<words.length;i++) {
 
-    // //     // const word = words[i];
-    // //     // const tWord = tWords[i];
-    // //     // gaparsvaDaDatukva(word,"b");
-    // //     // gaparsvaDaDatukva(tWord,"f");
-    // // }
-    // // for (let i = 0; i < words.length; i++) {
-    // //     const cardData = {
-    // //         frontText: words[i],
-    // //         backText: tWords[i]
-    // //     }
-    // //     // console.log(cardData)
-    // //     cardsData.push(cardData);
-    // // }
-    // // console.log(words,sentences.length,"dwadwafegf", tWords)
-    // // console.log("words",words,tWords)        
-    // // console.log(wordsForCards)
     return (
         <div className="chapter">
             <div className='topic-div'>
@@ -108,7 +75,7 @@ export default function Chapter(props) {
                     setOpenedGame(!openedGame)
                 }}>გახსნა/დახურვა</button>
                 <h2>{props.topic}</h2>
-                <div>{point}/{tries}</div>
+                <div className='result'>{point}/{tries}</div>
                 <div>
                     <button onClick={() => {
                         setOpenedGame(1)

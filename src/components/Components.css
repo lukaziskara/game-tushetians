@@ -1,22 +1,7 @@
-
 .chapter {
-    margin: 0.1em;
-    background-color: rgb(52, 175, 62);
-}
-.topic-div {
-    /* background-color: rgb(58, 74, 101); */
-    display: flex;
-    justify-content: space-between;
-}
-.flex_wrap {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.chapter {
-    margin: 4em;
+    margin: .7em;
     padding: 1em;
-    background-color: rgba(255, 255, 255, 0.839);
+    background-color: rgba(49, 58, 89, 0.839);
     box-shadow: 3px 8px 39px -5px rgba(74,74,74,0.78);
     border-radius: 10px;
 }
@@ -24,7 +9,24 @@
     color: #000000;
     display: flex;
     justify-content: space-between;
-    
+}
+.result {
+    margin: auto;
+    margin-right: 20px;
+    color: green;
+}
+button{
+    background-color: rgb(56, 102, 227);
+    border: none;
+    color: white;
+    border-radius: 10px;
+    padding: 0.5em;
+    margin: 1em;
+    cursor: pointer;
+}
+.flex_wrap {
+    display: flex;
+    flex-wrap: wrap;
 }
 .dictionary{
     background-color: rgb(255, 255, 255);
@@ -45,7 +47,9 @@
    /* height: 1em; */
 }
 .card{
+    border-radius: .3em;
     width: fit-content;
+    padding: .3em;
     margin: 5px;
     cursor: pointer;
 }
@@ -55,59 +59,16 @@
     width: fit-content;
     font-size: 0.7em;
 }
-.clickedRight {
+.clicked_right {
     background-color: #000000;
     color: white;
 }
 .left_card {
-    background-color: yellow;
+    background-color: rgb(126, 126, 65);
 }
-.invisible_left{
-    /* background-color: green; */
-    color: yellow;
-}
-.visible_left{
-    background-color: green;
-}
-.invisible_back{
-    background-color: rgb(95, 95, 95);
-    color: rgb(164, 164, 164);
-    background-color: rgb(164, 164, 164);
-}
-.visible_back{
-    background-color: grey;
-}
-.word{
-    background-color: rgb(255, 255, 255);
-    padding: 0.5em;
-    height: 1em;
-    margin: 1em;
-    border-radius: 10px;
-    border: 1px dotted blue;
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
-}
-.b_word {
-    background-color: aliceblue;
-}
-.t_word {
-    background-color: antiquewhite;
-    color: red;
-}
-.word:hover{
-    transform: translateY(-3px);
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0px 4px 5px 0px rgba(0, 38, 207, 0.78);
-}
-
-button{
-    background-color: rgb(56, 102, 227);
-    border: none;
-    color: white;
-    border-radius: 10px;
-    padding: 0.5em;
-    margin: 1em;
-    cursor: pointer;
+.clicked_left {
+    background-color: #414340;
+    color: rgb(255, 255, 255);
 }
 .span_element{
     /* background-color: rgb(8, 0, 255); */
