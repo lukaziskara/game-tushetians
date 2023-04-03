@@ -6,7 +6,7 @@ import WordsAndMarks from './WordsAndMarks';
 export default function Chapter(props) {
     const [point, setPoint] = useState(0)
     const [tries, setTries] = useState(0)
-    // console.log(props);
+    console.log(props);
     const [openedGame, setOpenedGame] = useState(0);
     const sentences = props.value;
 
@@ -47,11 +47,11 @@ export default function Chapter(props) {
                         
                 }
                 return {
-                    backText: newWord,
-                    bPunctMark: (bPunctMark) ? bPunctMark : "",
-                    frontText: newTrWord,
+                    backText: words[index],
+                    bPunctMark: (bPunctMark) ? bPunctMark:null,
+                    frontText: tWords[index],
                     tPunctMark: (tPunctMark) ? tPunctMark : "",
-                    id: Math.floor(Math.random()*1000)
+                    id: Math.floor(Math.random()*10000)
                 }
             } else {
                 return console.log(index, "ალექსის აინტერესებს რატომ ეწერა აქ სიტყვა არ მოიძებნაო")
@@ -59,15 +59,15 @@ export default function Chapter(props) {
         })
         
         // wordsForCards.sort(() => 0.5 - Math.random())
-        // console.log(wordsForCards);
+        console.log(wordsForCards);
 
         console.log("useMemo", point,tries)
         return wordsForCards
     },[])
     const takeSe = useMemo(()=>{
-        console.log("callBack", point,tries, wordsForCards)
+        // console.log("callBack", point,tries, wordsForCards)
     },[])
-
+    // console.log(wordsForCards)
     return (
         <div className="chapter">
             <div className='topic-div'>
@@ -75,15 +75,33 @@ export default function Chapter(props) {
                     setOpenedGame(!openedGame)
                 }}>გ/დ</button>
                 <h2 className='topic_header'>{props.topic}</h2>
-                <div className='result'>{point}/{tries}</div>
+                <div className='result'>
+                    <div className="point">{point}
+                    <div className="qula">ქულა</div>
+                    </div>/
+                    <div className="tries">{tries}
+                    <div className="cda">ცდა</div>
+                    </div>
+                    
+                </div>
                 <div>
+                    {openedGame===2?
                     <button onClick={() => {
                         setOpenedGame(1)
-                    }}>
-                        დაშნი</button>
+                        setPoint(0)
+                        setTries(0)
+                    }}>დაშნი</button>
+                    :openedGame===1?
                     <button onClick={() => {
                         setOpenedGame(2)
+                        setPoint(0)
+                        setTries(0)
                     }}>გრამატიკა</button>
+                    :<button onClick={() => {
+                        setOpenedGame(1)
+                    }}>დაშნი</button>
+
+                    }
                 </div>
             </div>
             <div>
@@ -94,10 +112,14 @@ export default function Chapter(props) {
                         tries={tries}
                         setTries={setTries}
                         cardsData={wordsForCards}
-                    />
+                        setOpenedGame={setOpenedGame}
+                        />
                         : (openedGame === 2) ? <WordsAndMarks
-                            name="luka"
-                            age='31'
+                        point={point}
+                        setPoint={setPoint}
+                        tries={tries}
+                        setTries={setTries}
+                        cardsData={wordsForCards}
                         />
                             : console.log(openedGame)
                 }

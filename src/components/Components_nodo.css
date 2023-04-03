@@ -14,8 +14,10 @@
     
 }
 .dictionary{
+    font-size: 12px;
     background-color: white;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
 }
 .word{
@@ -40,5 +42,16 @@ button{
     border-radius: 10px;
     padding: 0.5em;
     margin: 1em;
+}
+
+.left_card{
+    padding: 0.3em;
+    margin: 0.8em;
+    background-color: rgb(207, 207, 207);
+}
+
+.t_word{
+    display: flex;
+    flex-wrap: wrap;
 }
 
