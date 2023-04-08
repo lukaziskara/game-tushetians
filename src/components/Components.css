@@ -1,7 +1,7 @@
-*{
+/* *{
     margin: 0;
     padding: 0;
-  }
+  } */
 .chapter {
     margin: 1em .1em;
     padding: 0.7em .3em;
@@ -99,12 +99,18 @@ button{
 .expl {
     background-color: rgb(144, 145, 145);
 }
+
+
+
+/* ////////////////////////////////WordsAndMarks//////////////////////////////////////////////////////// */
 .words_and_marks {
     display: flex;
 }
 .words_wout_marks {
     display: flex;
     flex-wrap: wrap;
+    height: fit-content;
+    padding: 1em;
 }
 .word_wout_mark {
     margin: .3em;
@@ -112,13 +118,26 @@ button{
     cursor: pointer;
 }
 .clicked_word {
-    background-color: aqua;
+    background-color: rgb(88, 25, 25);
+}
+.marks {
+    background-color: antiquewhite;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: auto;
 }
 .mark {
     background-color: #767975;
     padding: .3em;
     margin: .1em;
     cursor: pointer;
+}
+.mark_among_words {
+    background-color: blue;
+    padding: 0 .5em .5em .5em;
+    border-radius: .3em;
+    margin: auto 0;
 }
 .clicked_mark {
     background-color: aquamarine;

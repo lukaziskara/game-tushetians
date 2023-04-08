@@ -5,11 +5,14 @@
 body{
   /* background: radial-gradient(circle, rgba(240,240,240,1) 0%, rgba(232,254,249,1) 51%, rgba(235,235,235,1) 100%); */
   background-color: rgb(136, 134, 134);
+  display: flex;
+  justify-content: center;
 }
 .App {
-  /* background-color: rgb(62, 77, 63); */
+  background-color: rgb(95, 96, 95);
   text-align: center;
   width: 100%;
+  max-width: 1000px;
   /* background-color: #61dafb; */
   /* margin: 3px; */
   /* padding: 5px; */

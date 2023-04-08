@@ -95,7 +95,7 @@ export default function Dictionary(props) { //[point,setPoint,tries,setTries,car
                         )}
                 </div>
                 <div className="next_game">
-                    {wonWords.length === 1 ?
+                    {shuffledDataForLeft.length === 0 ?
                         // <div className="next">შემდეგი თამაში</div>
                         <button onClick={() => props.setOpenedGame(2)}>შემდეგი თამაში</button>
                         // : <div className="">თამაში</div>}
