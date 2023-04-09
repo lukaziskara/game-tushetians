@@ -63,7 +63,7 @@ export default function Dictionary(props) { //[point,setPoint,tries,setTries,car
                             }}>
                             <div>
                                 <p>{cardData.frontText}</p>
-                                <p>{cardData.backText}</p>
+                                <p className="left_invisible">{cardData.backText}</p>
                             </div>
                         </div>
                         // <LeftCard back={cardData.backText} front={cardData.frontText} key={index} />
@@ -78,7 +78,7 @@ export default function Dictionary(props) { //[point,setPoint,tries,setTries,car
                                 setClickedRightCardId(cardData.id)
                             }}>
                             <div>
-                                <p>{cardData.backText}</p>
+                                <p className="right_invisible">{cardData.backText}</p>
                             </div>
                             {/* <RightCard isVisible={visibleBackIndex} back={cardData.backText} index={index} onClick={whenBackCardClicked} key={index} /> */}
                         </div>

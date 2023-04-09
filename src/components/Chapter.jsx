@@ -2,6 +2,7 @@ import { useMemo, useRef, useState } from 'react';
 import './Components.css';
 import Dictionary from './Dictionary';
 import WordsAndMarks from './WordsAndMarks';
+import CreateSentences from './CreateSentences';
 //კომპონენტს props-ებად მოეწოდება: value-შემთხვევითად არჩეული წინადადებები, 
 export default function Chapter(props) {
     const [point, setPoint] = useState(0)
@@ -9,6 +10,7 @@ export default function Chapter(props) {
     // console.log(props);
     const [openedGame, setOpenedGame] = useState(0);
     const sentences = props.value;
+    console.log(sentences)
     // შემთხვევითად ამოირჩევა წინადადებები ყოველი თავიდან და დაიშლება ობიექტებად, რომლებიც wordsForCards მასივში მიმდევრობით ჩალაგდება
     const marksAmount=useRef(0);
     const wordsForCards = useMemo(()=>{
@@ -93,13 +95,10 @@ export default function Chapter(props) {
     // const takeSe = useMemo(()=>{
     //     // console.log("callBack", point,tries, wordsForCards)
     // },[])
-    console.log(marksAmount.current,wordsForCards)
+    // console.log(marksAmount.current,wordsForCards)
     return (
         <div className="chapter">
             <div className='topic-div'>
-                <button onClick={() => {
-                    setOpenedGame(!openedGame)
-                }}>გ/დ</button>
                 <h2 className='topic_header'>{props.topic}</h2>
                 <div className='result'>
                     <div className="point">{point}
@@ -111,23 +110,28 @@ export default function Chapter(props) {
                     
                 </div>
                 <div>
-                    {openedGame===2?
-                    <button onClick={() => {
+                    {/* {openedGame===2? */}
+                    <button className={openedGame===1?"opened_game":"closed_game"}
+                     onClick={() => {
                         setOpenedGame(1)
                         setPoint(0)
                         setTries(0)
-                    }}>დაშნი</button>
-                    :openedGame===1?
-                    <button onClick={() => {
+                    }}>I</button>
+                    {/* :openedGame===1? */}
+                    <button className={openedGame===2?"opened_game":"closed_game"}
+                     onClick={() => {
                         setOpenedGame(2)
                         setPoint(0)
                         setTries(0)
-                    }}>გრამატიკა</button>
-                    :<button onClick={() => {
-                        setOpenedGame(1)
-                    }}>დაშნი</button>
+                    }}>II</button>
+                    <button className={openedGame===3?"opened_game":"closed_game"}
+                     onClick={() => {
+                        setOpenedGame(3)
+                        setPoint(0)
+                        setTries(0)
+                    }}>III</button>
 
-                    }
+                    {/* } */}
                 </div>
             </div>
             <div>
@@ -148,6 +152,15 @@ export default function Chapter(props) {
                         setTries={setTries}
                         cardsData={wordsForCards}
                         marksAmount={marksAmount.current}
+                        />
+                        : (openedGame === 3) ?
+                        <CreateSentences 
+                        point={point}
+                        setPoint={setPoint}
+                        tries={tries}
+                        setTries={setTries}
+                        cardsData={wordsForCards}
+                        sentences={sentences}
                         />
                             : console.log(openedGame)
                 }
