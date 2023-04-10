@@ -1,15 +1,22 @@
+import { useState } from "react"
 
 export default function CreateSentences(props) {
     const cardsData = props.cardsData
     const sentences = props.sentences
     console.log(props)
+    const [clickedSentence, setClickedSentence] = useState(false)
 
     return (
         <div className="words_and_sentences">
             <div className="sentences">
                 {
-                    sentences.map((sentence)=>{
-                        return <div className="full_sentence">{sentence.translation}</div>
+                    sentences.map((sentence,index)=>{
+                        return <div className={clickedSentence===index?"full_sentence clicked_Sentence":"full_sentence"}
+                         onClick={()=>{
+                            console.log(sentence.translation)
+                            setClickedSentence(index)
+                         }}
+                        >{sentence.translation}</div>
                     })
                 }
             </div>

@@ -16,7 +16,6 @@ export default function Dictionary(props) { //[point,setPoint,tries,setTries,car
     // console.log("cardsData",typeof(cardsData),cardsData, cardsData.length)
     const [clickedRightCardId, setClickedRightCardId] = useState();
     const [clickedLeftCard, setClickedLeftCard] = useState();
-    const [isVisibleBack, setIsVisibleBack] = useState();
     const [visibleBackIndex, setVisibleBackIndex] = useState();
     const shuffledDataForLeft = useMemo(() => {
         return cardsData.map((cardData) => {
@@ -50,7 +49,7 @@ export default function Dictionary(props) { //[point,setPoint,tries,setTries,car
                                 leftBack.current = cardData.backText
                                 console.log(backTextId.current, shuffledDataForRight)
                                 // if(leftBack.current==rightBack.current){
-                                if (leftBack.current == rightBack.current) {
+                                if (leftBack.current === rightBack.current) {
                                     props.setPoint(props.point + 1)
                                     props.setTries(props.tries + 1)
                                     wonWords.push(cardData)
@@ -63,7 +62,8 @@ export default function Dictionary(props) { //[point,setPoint,tries,setTries,car
                             }}>
                             <div>
                                 <p>{cardData.frontText}</p>
-                                <p className="left_invisible">{cardData.backText}</p>
+                                <p className={props.isVisibleFront?"left_visible":"left_invisible"}>{cardData.backText}</p>
+                                {/* <p className="left_invisible">{cardData.backText}</p> */}
                             </div>
                         </div>
                         // <LeftCard back={cardData.backText} front={cardData.frontText} key={index} />
@@ -78,7 +78,7 @@ export default function Dictionary(props) { //[point,setPoint,tries,setTries,car
                                 setClickedRightCardId(cardData.id)
                             }}>
                             <div>
-                                <p className="right_invisible">{cardData.backText}</p>
+                                <p className={props.isVisibleBack?"right_visible":"right_invisible"}>{cardData.backText}</p>
                             </div>
                             {/* <RightCard isVisible={visibleBackIndex} back={cardData.backText} index={index} onClick={whenBackCardClicked} key={index} /> */}
                         </div>

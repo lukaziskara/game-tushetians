@@ -9,6 +9,8 @@ export default function Chapter(props) {
     const [tries, setTries] = useState(0)
     // console.log(props);
     const [openedGame, setOpenedGame] = useState(0);
+    const [isVisibleBack, setIsVisibleBack] = useState(false);
+    const [isVisibleFront, setIsVisibleFront] = useState(false);
     const sentences = props.value;
     console.log(sentences)
     // შემთხვევითად ამოირჩევა წინადადებები ყოველი თავიდან და დაიშლება ობიექტებად, რომლებიც wordsForCards მასივში მიმდევრობით ჩალაგდება
@@ -109,14 +111,33 @@ export default function Chapter(props) {
                     </div>
                     
                 </div>
-                <div>
+                <div className='flex'>
+                    <div className="dict_button">
+
                     {/* {openedGame===2? */}
-                    <button className={openedGame===1?"opened_game":"closed_game"}
+                    <button className={openedGame===1?"opened_game":""}
                      onClick={() => {
-                        setOpenedGame(1)
-                        setPoint(0)
-                        setTries(0)
-                    }}>I</button>
+                         setOpenedGame(1)
+                         setPoint(0)
+                         setTries(0)
+                        }}>I</button>
+                    {
+                        openedGame===1?
+                        <div className="dict_level_buttons">
+                            <button className={isVisibleFront?'clicked_button':''} 
+                             onClick={()=>{
+                                setIsVisibleFront(!isVisibleFront)
+                                console.log(isVisibleFront)
+                            }}></button>
+                            <button className={isVisibleBack?'clicked_button':''} 
+                            onClick={()=>{
+                                setIsVisibleBack(!isVisibleBack)
+                                console.log(isVisibleBack)
+                            }}></button>
+                        </div>
+                        :console.log()
+                    }
+                    </div>
                     {/* :openedGame===1? */}
                     <button className={openedGame===2?"opened_game":"closed_game"}
                      onClick={() => {
@@ -143,6 +164,8 @@ export default function Chapter(props) {
                         setTries={setTries}
                         cardsData={wordsForCards}
                         setOpenedGame={setOpenedGame}
+                        isVisibleFront={isVisibleFront}
+                        isVisibleBack={isVisibleBack}
                         />
                         : (openedGame === 2) ?
                         <WordsAndMarks
