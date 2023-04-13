@@ -11,6 +11,7 @@ export default function Chapter(props) {
     const [openedGame, setOpenedGame] = useState(0);
     const [isVisibleBack, setIsVisibleBack] = useState(false);
     const [isVisibleFront, setIsVisibleFront] = useState(false);
+    const [isWonVisible, setIsWonVisible] = useState(isVisibleFront);
     const sentences = props.value;
     console.log(sentences)
     // შემთხვევითად ამოირჩევა წინადადებები ყოველი თავიდან და დაიშლება ობიექტებად, რომლებიც wordsForCards მასივში მიმდევრობით ჩალაგდება
@@ -20,7 +21,7 @@ export default function Chapter(props) {
         const tWords = [];
         //
         for (let i = 0; i < sentences.length; i++) {
-            const randomNumber = Math.floor(Math.random() * sentences.length);
+            // const randomNumber = Math.floor(Math.random() * sentences.length);
             const sentence = sentences[i].sentence;
             const translation = sentences[i].translation;
             words.push(...sentence.split(' '));
@@ -33,7 +34,7 @@ export default function Chapter(props) {
             let bPunctMark;
             let tPunctMark;
             
-            const word = value.split()
+            // const word = value.split()
             // console.log(value)
             
             const signsArray = words[index].split("");
@@ -127,6 +128,7 @@ export default function Chapter(props) {
                             <button className={isVisibleFront?'clicked_button':''} 
                              onClick={()=>{
                                 setIsVisibleFront(!isVisibleFront)
+                                setIsWonVisible(!isVisibleFront)
                                 console.log(isVisibleFront)
                             }}></button>
                             <button className={isVisibleBack?'clicked_button':''} 
@@ -166,8 +168,9 @@ export default function Chapter(props) {
                         setOpenedGame={setOpenedGame}
                         isVisibleFront={isVisibleFront}
                         isVisibleBack={isVisibleBack}
+                        sentences={sentences}
                         />
-                        : (openedGame === 2) ?
+                    : (openedGame === 2) ?
                         <WordsAndMarks
                         point={point}
                         setPoint={setPoint}
@@ -176,16 +179,17 @@ export default function Chapter(props) {
                         cardsData={wordsForCards}
                         marksAmount={marksAmount.current}
                         />
-                        : (openedGame === 3) ?
+                    : (openedGame === 3) ?
                         <CreateSentences 
                         point={point}
                         setPoint={setPoint}
                         tries={tries}
                         setTries={setTries}
                         cardsData={wordsForCards}
+                        isWonVisible={isWonVisible}
                         sentences={sentences}
                         />
-                            : console.log(openedGame)
+                    : console.log(openedGame)
                 }
             </div>
         </div>

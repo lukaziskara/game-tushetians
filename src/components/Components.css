@@ -2,6 +2,10 @@
     margin: 0;
     padding: 0;
   } */
+  p{
+    text-align: center;
+    margin: auto;
+  }
 .chapter {
     margin: 1em .1em;
     padding: 0.7em .3em;
@@ -63,7 +67,7 @@ button{
    /* height: 1em; */
 }
 .b_words {
-   background-color: rgb(94, 95, 94);
+   background-color: rgb(54, 55, 54);
    width: 33%;
    display: flex;
    /* flex-direction: column; */
@@ -81,7 +85,6 @@ button{
     background-color: rgb(4, 127, 4);
     color: rgb(16, 16, 16);
     width: fit-content;
-    font-size: 0.7em;
 }
 .right_invisible {
     color: rgb(4, 127, 4);
@@ -107,20 +110,22 @@ button{
     color: rgb(255, 255, 255);
 }
 .end_game {
-    display: flex;
+    /* display: flex; */
 }
 .won_words {
-    width: 80%;
-    background-color: #414340;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #5c605a;
 }
 .won_word {
     width: 3em;
     min-width: fit-content;
     margin: .3em;
-    background-color: rgb(90, 90, 94);
+    background-color: rgb(4, 127, 4);
 }
 .expl {
-    background-color: rgb(144, 145, 145);
+    background-color: rgb(38, 71, 71);
 }
 
 
@@ -194,10 +199,20 @@ button{
 .clicked_Sentence {
     background-color: #91764a;
 }
-.words_on_cards {
+.words_for_sentence {
     background-color: rgb(90, 62, 22);
     display: flex;
     flex-wrap: wrap;
+}
+.word_for_sentence {
+    background-color: #82874d;
+    padding: .3em;
+    margin: .3em;
+    border-radius: .3em;
+    cursor: pointer;
+}
+.won_invisible {
+    color: #82874d;
 }
 .word_card {
     background-color: green;

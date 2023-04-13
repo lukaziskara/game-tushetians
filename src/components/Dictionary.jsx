@@ -10,6 +10,7 @@ export default function Dictionary(props) { //[point,setPoint,tries,setTries,car
     const leftBack = useRef()
     const rightBack = useRef()
     const backTextId = useRef()
+    const sentences = props.sentences
     const cardsData = props.cardsData
     const startingWords = useRef(cardsData.length)
     // const wonWords = useRef([1,2,3]);
@@ -17,6 +18,7 @@ export default function Dictionary(props) { //[point,setPoint,tries,setTries,car
     const [clickedRightCardId, setClickedRightCardId] = useState();
     const [clickedLeftCard, setClickedLeftCard] = useState();
     const [visibleBackIndex, setVisibleBackIndex] = useState();
+    const [clickedSentence, setClickedSentence] = useState(false);
     const shuffledDataForLeft = useMemo(() => {
         return cardsData.map((cardData) => {
             // console.log(cardData)
@@ -86,11 +88,25 @@ export default function Dictionary(props) { //[point,setPoint,tries,setTries,car
                 </div>
             </div>
             <div className="end_game">
+                <div className="sentences">
+                    {
+                        sentences.map((sentence,index)=>{
+                            return <div className={clickedSentence===index?"full_sentence clicked_Sentence":"full_sentence"}
+                            onClick={()=>{
+                                console.log(sentence.translation)
+                                setClickedSentence(index)
+                            }}
+                            >{sentence.translation}</div>
+                        })
+                    }
+                </div>
                 <div className="won_words">
                     {
                         wonWords.map((wonWord, index) =>
-                            <div className="won_word">{wonWord.frontText}-{wonWord.backText}
-                                <div className="expl">განმარტება</div>
+                            <div className="won_word">
+                                <div>{wonWord.backText}</div>
+                                <div>{wonWord.frontText}</div>
+                                {/* <div className="expl">განმარტება</div> */}
                             </div>
                         )}
                 </div>
