@@ -3,20 +3,31 @@ import "./Components.css";
 import Dictionary from "./Dictionary";
 import WordsAndMarks from "./WordsAndMarks";
 import CreateSentences from "./CreateSentences";
-import Settings from "./Settings";
+import Settings from "./GameSettings";
 //კომპონენტს props-ებად მოეწოდება: value-შემთხვევითად არჩეული წინადადებები,
 export default function Chapter(props) {
   const [point, setPoint] = useState(0);
   const [tries, setTries] = useState(0);
   // console.log(props);
   const [openedGame, setOpenedGame] = useState(false);
+  const [newGame, setNewGame] = useState();
   const [isVisibleBack, setIsVisibleBack] = useState(false);
   const [isVisibleFront, setIsVisibleFront] = useState(false);
   const [isWonVisible, setIsWonVisible] = useState(isVisibleFront);
+  const [firstPartState, setFirstPartState] = useState("first_visible");
+  const [secondPartState, setSecondPartState] = useState("second_visible");
+  const [thirdPartState, setThirdPartState] = useState("third_visible");
   const sentences = props.value;
   console.log(sentences);
   // შემთხვევითად ამოირჩევა წინადადებები ყოველი თავიდან და დაიშლება ობიექტებად, რომლებიც wordsForCards მასივში მიმდევრობით ჩალაგდება
   const marksAmount = useRef(0);
+  const settings = useMemo(() => {
+    return {
+      firstPartState,
+      secondPartState,
+      thirdPartState,
+    };
+  }, [newGame]);
   const wordsForCards = useMemo(() => {
     const words = [];
     const tWords = [];
@@ -80,7 +91,7 @@ export default function Chapter(props) {
           id: Math.floor(Math.random() * 10000),
         };
       } else {
-        return console.log(index, "tWords[index] არ არსებობს");
+        // return console.log(index, "tWords[index] არ არსებობს");
       }
     });
 
@@ -132,14 +143,14 @@ export default function Chapter(props) {
                   onClick={() => {
                     setIsVisibleFront(!isVisibleFront);
                     setIsWonVisible(!isVisibleFront);
-                    console.log(isVisibleFront);
+                    // console.log(isVisibleFront);
                   }}
                 ></button>
                 <button
                   className={isVisibleBack ? "clicked_button" : ""}
                   onClick={() => {
                     setIsVisibleBack(!isVisibleBack);
-                    console.log(isVisibleBack);
+                    // console.log(isVisibleBack);
                   }}
                 ></button>
               </div>
@@ -175,11 +186,14 @@ export default function Chapter(props) {
       <div>
         {openedGame === 0 ? (
           <Settings
-            // point={point}
+            firstPartState={firstPartState}
+            secondPartState={secondPartState}
+            thirdPartState={thirdPartState}
+            setFirstPartState={setFirstPartState}
+            setSecondPartState={setSecondPartState}
+            setThirdPartState={setThirdPartState}
             setPoint={setPoint}
-            // tries={tries}
             setTries={setTries}
-            // openedGame={openedGame}
             setOpenedGame={setOpenedGame}
           />
         ) : openedGame === 1 ? (
@@ -188,6 +202,12 @@ export default function Chapter(props) {
             setPoint={setPoint}
             tries={tries}
             setTries={setTries}
+            firstPartState={firstPartState}
+            secondPartState={secondPartState}
+            thirdPartState={thirdPartState}
+            setFirstPartState={setFirstPartState}
+            setSecondPartState={setSecondPartState}
+            setThirdPartState={setThirdPartState}
             cardsData={wordsForCards}
             setOpenedGame={setOpenedGame}
             isVisibleFront={isVisibleFront}

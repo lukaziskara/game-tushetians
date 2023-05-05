@@ -86,7 +86,7 @@ button {
 .first_waiting,
 .first_invisible,
 .second_waiting {
-  background-color: #91764a;
+  /* background-color: #91764a; */
   color: #91764a;
 }
 .right_waiting {
@@ -116,11 +116,13 @@ button {
   padding: 0.3em;
   margin: 5px;
   cursor: pointer;
+  transition: all 0.3 ease-in-out;
+  height: fit-content;
 }
 .right_card {
   background-color: rgb(4, 127, 4);
   color: rgb(16, 16, 16);
-  width: fit-content;
+  /* width: fit-content; */
 }
 .third_waiting {
   color: rgb(4, 127, 4);
@@ -130,17 +132,20 @@ button {
 }
 .clicked_right {
   background-color: #000000;
-  color: white;
+  /* height: fit-content; */
+  /* transition: all 0.3 ease-in-out; */
+  /* color: white; */
 }
 .left_card {
   background-color: rgb(150, 121, 47);
+  /* height: fit-content; */
 }
 .left_visible {
   color: rgb(0, 0, 0);
 }
 .clicked_left {
-  background-color: #414340;
-  color: rgb(255, 255, 255);
+  background-color: black;
+  /* color: rgb(255, 255, 255); */
 }
 .end_game {
   /* display: flex; */
