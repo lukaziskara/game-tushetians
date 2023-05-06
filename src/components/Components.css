@@ -77,6 +77,9 @@ button {
   border-radius: 0.3em;
   cursor: pointer;
 }
+.cItem {
+  background-color: #82874d;
+}
 .middle_visible {
   background-color: #91764a;
 }

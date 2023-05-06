@@ -3,10 +3,15 @@ import LeftCard from "./LeftCard";
 import RightCard from "./RightCard";
 import React from "react";
 
-const wonWords = [];
-
 export default function Dictionary(props) {
-  const { firstPartState, secondPartState, thirdPartState } = props;
+  const {
+    newGame,
+    setPartOfGame,
+    firstPartState,
+    secondPartState,
+    thirdPartState,
+  } = props;
+  const wonWords = useRef([], [newGame]);
   //[point,setPoint,tries,setTries,cardsData]
   // console.log("შედეგები",props.point, props.tries,props)
   const leftBack = useRef();
@@ -35,9 +40,11 @@ export default function Dictionary(props) {
       .sort(() => 0.5 - Math.random());
   }, []);
   const shuffledDataForRight = useMemo(() => {
+    console.log("dasfsnjkbnjjhbjhbjhbjh");
     return cardsData
       .map((cardData) => {
         return {
+          frontText: cardData.frontText,
           backText: cardData.backText,
           id: cardData.id,
         };
@@ -52,41 +59,6 @@ export default function Dictionary(props) {
         <div className="t_words flex_wrap">
           {shuffledDataForLeft.map(
             (cardData, index) => (
-              // <div
-              //   className={
-              //     clickedLeftCard === cardData.id
-              //       ? "card clicked_left"
-              //       : "card left_card"
-              //   }
-              //   onClick={() => {
-              //     // leftBack.current = "dwafesdr"
-              //     leftBack.current = cardData.backText;
-              //     console.log(backTextId.current, shuffledDataForRight);
-              //     // if(leftBack.current==rightBack.current){
-              //     if (leftBack.current === rightBack.current) {
-              //       props.setPoint(props.point + 1);
-              //       props.setTries(props.tries + 1);
-              //       wonWords.push(cardData);
-              //       shuffledDataForLeft.splice(index, 1);
-              //       shuffledDataForRight.splice(backTextId.current, 1);
-              //     } else {
-              //       props.setTries(props.tries + 1);
-              //     }
-              //     setClickedLeftCardId(cardData.id);
-              //   }}
-              // >
-              //   <div>
-              //     <p>{cardData.frontText}</p>
-              //     <p
-              //       className={
-              //         props.isVisibleFront ? "left_visible" : "left_invisible"
-              //       }
-              //     >
-              //       {cardData.backText}
-              //     </p>
-              //     {/* <p className="left_invisible">{cardData.backText}</p> */}
-              //   </div>
-              // </div>
               <div
                 className={
                   clickedLeftCardId === cardData.id
@@ -103,8 +75,8 @@ export default function Dictionary(props) {
                   if (leftBack.current === rightBack.current) {
                     props.setPoint(props.point + 1);
                     props.setTries(props.tries + 1);
-                    wonWords.push(cardData);
-                    shuffledDataForLeft.splice(index, 1);
+                    wonWords.current.push(cardData);
+                    shuffledDataForLeft.splice(frontTextId.current, 1);
                     shuffledDataForRight.splice(backTextId.current, 1);
                     rightBack.current = null;
                     leftBack.current = null;
@@ -122,7 +94,7 @@ export default function Dictionary(props) {
           )}
         </div>
         <div className="b_words flex_wrap">
-          {shuffledDataForLeft.map((cardData, index) => (
+          {shuffledDataForRight.map((cardData, index) => (
             <div
               className={
                 clickedRightCardId === cardData.id
@@ -137,8 +109,8 @@ export default function Dictionary(props) {
                 if (leftBack.current === rightBack.current) {
                   props.setPoint(props.point + 1);
                   props.setTries(props.tries + 1);
-                  wonWords.push(cardData);
-                  shuffledDataForLeft.splice(index, 1);
+                  wonWords.current.push(cardData);
+                  shuffledDataForLeft.splice(frontTextId.current, 1);
                   shuffledDataForRight.splice(backTextId.current, 1);
                   rightBack.current = null;
                   leftBack.current = null;
@@ -148,7 +120,7 @@ export default function Dictionary(props) {
               }}
             >
               <div>
-                <p className={thirdPartState}>{cardData.backText}</p>
+                <div className={thirdPartState}>{cardData.backText}</div>
               </div>
               {/* <RightCard isVisible={visibleBackIndex} back={cardData.backText} index={index} onClick={whenBackCardClicked} key={index} /> */}
             </div>
@@ -176,7 +148,7 @@ export default function Dictionary(props) {
           })}
         </div> */}
         <div className="won_words">
-          {wonWords.map((wonWord, index) => (
+          {wonWords.current.map((wonWord, index) => (
             <div className="won_word">
               <div>{wonWord.frontText}</div>
               <div>{wonWord.backText}</div>
@@ -187,9 +159,7 @@ export default function Dictionary(props) {
         <div className="next_game">
           {shuffledDataForLeft.length === 0 ? (
             // <div className="next">შემდეგი თამაში</div>
-            <button onClick={() => props.setOpenedGame(2)}>
-              შემდეგი თამაში
-            </button>
+            <button onClick={() => setPartOfGame(2)}>შემდეგი თამაში</button>
           ) : (
             // : <div className="">თამაში</div>}
             console.log(

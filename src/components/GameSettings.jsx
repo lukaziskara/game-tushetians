@@ -39,35 +39,27 @@ const gameDifficulties = [
 ];
 
 export default function Settings(props) {
-  // const [firstState, setFirstPartState] = useState(
-  //   gameDifficulties[0].isFirstVisible
-  // );
-  // const [secondState, setSecondState] = useState(
-  //   gameDifficulties[0].isSecondVisible
-  // );
-  // const [thirdState, setThirdState] = useState(
-  //   gameDifficulties[0].isThirdVisible
-  // );
   const {
+    newGame,
     setNewGame,
     setPoint,
     setTries,
-    setOpenedGame,
-    firstPartState,
-    setFirstPartState,
-    secondPartState,
-    setSecondPartState,
-    thirdPartState,
-    setThirdPartState,
+    setPartOfGame,
+    settings,
+    setSettings,
   } = props;
+  const [firstPartState, setFirstPartState] = useState(
+    gameDifficulties[0].isFirstVisible
+  );
+  const [secondPartState, setSecondPartState] = useState(
+    gameDifficulties[0].isSecondVisible
+  );
+  const [thirdPartState, setThirdPartState] = useState(
+    gameDifficulties[0].isThirdVisible
+  );
+  const [chosenDifficulty, setChosenDifficulty] = useState(1);
   console.log("rerender");
-  // console.log(obj, m, n);
-  // const [firstPartState, setFirstPartState] = useState("first_visible");
-  // const [secondPartState, setSecondPartState] = useState("second_visible");
-  // const [thirdPartState, setThirdPartState] = useState("third_visible");
-  // useEffect(() => {
-  //   // console.log(firstState, secondState, thirdState);
-  // }, [firstState, secondState, thirdState]);
+
   return (
     <>
       <div className="flex_center select_difficulty">
@@ -75,10 +67,11 @@ export default function Settings(props) {
           // console.log(gameDifficulty);
 
           <div
-            className="dItem"
+            className={chosenDifficulty === index + 1 ? "dItem cItem" : "dItem"}
             onClick={() => {
               // console.log(gameDifficulty, index);
               // setNewGame();
+              setChosenDifficulty(index + 1);
               setFirstPartState(gameDifficulty.isFirstVisible);
               setSecondPartState(gameDifficulty.isSecondVisible);
               setThirdPartState(gameDifficulty.isThirdVisible);
@@ -101,7 +94,13 @@ export default function Settings(props) {
         onClick={() => {
           setPoint(0);
           setTries(0);
-          setOpenedGame(1);
+          setPartOfGame(1);
+          setNewGame(newGame + 1);
+          setSettings({
+            firstPartState: firstPartState,
+            secondPartState: secondPartState,
+            thirdPartState: thirdPartState,
+          });
         }}
       >
         დაწყება

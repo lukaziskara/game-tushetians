@@ -10,28 +10,38 @@ export default function Chapter(props) {
   const [tries, setTries] = useState(0);
   // console.log(props);
   const [openedGame, setOpenedGame] = useState(false);
-  const [newGame, setNewGame] = useState();
+  const [partOfGame, setPartOfGame] = useState(0);
+  const [newGame, setNewGame] = useState(0);
   const [isVisibleBack, setIsVisibleBack] = useState(false);
   const [isVisibleFront, setIsVisibleFront] = useState(false);
   const [isWonVisible, setIsWonVisible] = useState(isVisibleFront);
-  const [firstPartState, setFirstPartState] = useState("first_visible");
-  const [secondPartState, setSecondPartState] = useState("second_visible");
-  const [thirdPartState, setThirdPartState] = useState("third_visible");
+  const [settings, setSettings] = useState({
+    firstPartState: "first_visible",
+    secondPartState: "second_visible",
+    thirdPartState: "third_visible",
+  });
+  // const [firstPartState, setFirstPartState] = useState("first_visible");
+  // const [secondPartState, setSecondPartState] = useState("second_visible");
+  // const [thirdPartState, setThirdPartState] = useState("third_visible");
+
   const sentences = props.value;
-  console.log(sentences);
+  console.log(sentences, settings);
   // შემთხვევითად ამოირჩევა წინადადებები ყოველი თავიდან და დაიშლება ობიექტებად, რომლებიც wordsForCards მასივში მიმდევრობით ჩალაგდება
   const marksAmount = useRef(0);
-  const settings = useMemo(() => {
-    return {
-      firstPartState,
-      secondPartState,
-      thirdPartState,
-    };
-  }, [newGame]);
+  // const settings = useRef(
+  //   {
+  //     firstPartState,
+  //     secondPartState,
+  //     thirdPartState,
+  //   },
+  //   [newGame]
+  // );
+  console.log(settings);
   const wordsForCards = useMemo(() => {
     const words = [];
     const tWords = [];
     //
+    console.log(newGame);
     for (let i = 0; i < sentences.length; i++) {
       const sentence = sentences[i].sentence;
       const translation = sentences[i].translation;
@@ -94,19 +104,13 @@ export default function Chapter(props) {
         // return console.log(index, "tWords[index] არ არსებობს");
       }
     });
-
-    // wordsForCards.sort(() => 0.5 - Math.random())
-    // console.log(wordsForCards);
-
-    // console.log("useMemo", point,tries)
-    // return wordsForCards
-  }, []);
+  }, [newGame]);
   return (
     <div className="chapter">
       <div className="topic-div">
         <button
           onClick={() => {
-            openedGame === false ? setOpenedGame(0) : setOpenedGame(false);
+            openedGame === false ? setOpenedGame(true) : setOpenedGame(false);
           }}
         >
           ჩამოშლა
@@ -123,46 +127,33 @@ export default function Chapter(props) {
             <div className="cda">ცდა</div>
           </div>
         </div>
-        <div className="flex">
-          <div className="dict_button">
-            {/* {openedGame===2? */}
-            <button
-              className={openedGame === 1 ? "opened_game" : ""}
-              onClick={() => {
-                setOpenedGame(1);
-                setPoint(0);
-                setTries(0);
-              }}
-            >
-              I
-            </button>
-            {openedGame === 1 ? (
-              <div className="dict_level_buttons">
-                <button
-                  className={isVisibleFront ? "clicked_button" : ""}
-                  onClick={() => {
-                    setIsVisibleFront(!isVisibleFront);
-                    setIsWonVisible(!isVisibleFront);
-                    // console.log(isVisibleFront);
-                  }}
-                ></button>
-                <button
-                  className={isVisibleBack ? "clicked_button" : ""}
-                  onClick={() => {
-                    setIsVisibleBack(!isVisibleBack);
-                    // console.log(isVisibleBack);
-                  }}
-                ></button>
-              </div>
-            ) : (
-              console.log()
-            )}
-          </div>
+        <div className="game_part_buttons">
+          {/* {openedGame===2? */}
+          <button
+            className={partOfGame === 0 ? "opened_game" : ""}
+            onClick={() => {
+              setPartOfGame(0);
+              // setPoint(0);
+              // setTries(0);
+            }}
+          >
+            S
+          </button>
+          <button
+            className={partOfGame === 1 ? "opened_game" : ""}
+            onClick={() => {
+              setPartOfGame(1);
+              setPoint(0);
+              setTries(0);
+            }}
+          >
+            I
+          </button>
           {/* :openedGame===1? */}
           <button
-            className={openedGame === 2 ? "opened_game" : "closed_game"}
+            className={partOfGame === 2 ? "opened_game" : "closed_game"}
             onClick={() => {
-              setOpenedGame(2);
+              setPartOfGame(2);
               setPoint(0);
               setTries(0);
             }}
@@ -170,72 +161,88 @@ export default function Chapter(props) {
             II
           </button>
           <button
-            className={openedGame === 3 ? "opened_game" : "closed_game"}
+            className={partOfGame === 3 ? "opened_game" : "closed_game"}
             onClick={() => {
-              setOpenedGame(3);
+              setPartOfGame(3);
               setPoint(0);
               setTries(0);
             }}
           >
             III
           </button>
-
+          <button
+            // className={}
+            onClick={() => {
+              setPartOfGame(0);
+              setPoint(0);
+              setTries(0);
+            }}
+          >
+            R
+          </button>
           {/* } */}
         </div>
       </div>
       <div>
-        {openedGame === 0 ? (
-          <Settings
-            firstPartState={firstPartState}
-            secondPartState={secondPartState}
-            thirdPartState={thirdPartState}
-            setFirstPartState={setFirstPartState}
-            setSecondPartState={setSecondPartState}
-            setThirdPartState={setThirdPartState}
-            setPoint={setPoint}
-            setTries={setTries}
-            setOpenedGame={setOpenedGame}
-          />
-        ) : openedGame === 1 ? (
-          <Dictionary
-            point={point}
-            setPoint={setPoint}
-            tries={tries}
-            setTries={setTries}
-            firstPartState={firstPartState}
-            secondPartState={secondPartState}
-            thirdPartState={thirdPartState}
-            setFirstPartState={setFirstPartState}
-            setSecondPartState={setSecondPartState}
-            setThirdPartState={setThirdPartState}
-            cardsData={wordsForCards}
-            setOpenedGame={setOpenedGame}
-            isVisibleFront={isVisibleFront}
-            isVisibleBack={isVisibleBack}
-            sentences={sentences}
-          />
-        ) : openedGame === 2 ? (
-          <CreateSentences
-            point={point}
-            setPoint={setPoint}
-            tries={tries}
-            setTries={setTries}
-            cardsData={wordsForCards}
-            isWonVisible={isWonVisible}
-            sentences={sentences}
-          />
-        ) : openedGame === 3 ? (
-          <WordsAndMarks
-            point={point}
-            setPoint={setPoint}
-            tries={tries}
-            setTries={setTries}
-            cardsData={wordsForCards}
-            marksAmount={marksAmount.current}
-          />
-        ) : (
-          console.log(openedGame)
-        )}
+        {openedGame ? (
+          partOfGame === 0 ? (
+            <Settings
+              // firstPartState={firstPartState}
+              // secondPartState={secondPartState}
+              // thirdPartState={thirdPartState}
+              // setFirstPartState={setFirstPartState}
+              // setSecondPartState={setSecondPartState}
+              // setThirdPartState={setThirdPartState}
+              newGame={newGame}
+              setNewGame={setNewGame}
+              settings={settings}
+              setSettings={setSettings}
+              setPoint={setPoint}
+              setTries={setTries}
+              setPartOfGame={setPartOfGame}
+            />
+          ) : partOfGame === 1 ? (
+            <Dictionary
+              newGame={newGame}
+              point={point}
+              setPoint={setPoint}
+              tries={tries}
+              setTries={setTries}
+              firstPartState={settings.firstPartState}
+              secondPartState={settings.secondPartState}
+              thirdPartState={settings.thirdPartState}
+              // setFirstPartState={setFirstPartState}
+              // setSecondPartState={setSecondPartState}
+              // setThirdPartState={setThirdPartState}
+              cardsData={wordsForCards}
+              setPartOfGame={setPartOfGame}
+              isVisibleFront={isVisibleFront}
+              isVisibleBack={isVisibleBack}
+              sentences={sentences}
+            />
+          ) : partOfGame === 2 ? (
+            <CreateSentences
+              point={point}
+              setPoint={setPoint}
+              tries={tries}
+              setTries={setTries}
+              cardsData={wordsForCards}
+              isWonVisible={isWonVisible}
+              sentences={sentences}
+            />
+          ) : partOfGame === 3 ? (
+            <WordsAndMarks
+              point={point}
+              setPoint={setPoint}
+              tries={tries}
+              setTries={setTries}
+              cardsData={wordsForCards}
+              marksAmount={marksAmount.current}
+            />
+          ) : (
+            console.log(openedGame)
+          )
+        ) : null}
       </div>
     </div>
   );
