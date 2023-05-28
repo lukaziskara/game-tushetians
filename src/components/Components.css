@@ -64,7 +64,7 @@ button {
   display: flex;
   /* flex-wrap: wrap; */
 }
-.example {
+.examples {
   background-color: rgb(9, 9, 171);
   display: flex;
   justify-content: space-around;
@@ -170,6 +170,10 @@ button {
 }
 
 /* ////////////////////////////////WordsAndMarks//////////////////////////////////////////////////////// */
+.flex_wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
 .words_and_marks {
   display: flex;
 }

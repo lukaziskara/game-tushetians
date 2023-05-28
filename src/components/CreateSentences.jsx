@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 
 export default function CreateSentences(props) {
+  console.log(props);
   const cardsData = props.cardsData;
   const sentences = props.sentences;
   console.log(props);
@@ -15,7 +16,7 @@ export default function CreateSentences(props) {
       <div className="sentences">
         {sentences.map((sentence, index) => {
           return (
-            <div className="">
+            <div className="test">
               <div
                 className={
                   clickedSentence === index
@@ -29,38 +30,55 @@ export default function CreateSentences(props) {
               >
                 {sentence.translation}
               </div>
-              <div className="">ასაწყობი ადგილი</div>
+              <div className="flex_wrap">
+                {cardsData.map((cardData, index) => (
+                  <div
+                    className={
+                      clickedWordCard === index
+                        ? "word_for_sentence clicked_word_for_sentence"
+                        : "card"
+                    }
+                    onClick={() => {
+                      console.log(cardData);
+                      setClickedWordCard(index);
+                    }}
+                  >
+                    <div
+                      className={
+                        props.isWonVisible ? "won_visible" : "won_invisible"
+                      }
+                    >
+                      {cardData.frontText}
+                    </div>
+                    <div className="">{cardData.backText}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           );
         })}
       </div>
       <div className="words_for_sentence">
-        {cardsData.map((cardData, index) => {
-          return (
+        {cardsData.map((cardData, index) => (
+          <div
+            className={
+              clickedWordCard === index
+                ? "word_for_sentence clicked_word_for_sentence"
+                : "card"
+            }
+            onClick={() => {
+              console.log(cardData);
+              setClickedWordCard(index);
+            }}
+          >
+            <div className="">{cardData.backText}</div>
             <div
-              className={
-                clickedWordCard === index
-                  ? "word_for_sentence clicked_word_for_sentence"
-                  : "word_for_sentence"
-              }
+              className={props.isWonVisible ? "won_visible" : "won_invisible"}
             >
-              <div
-                className=""
-                onClick={() => {
-                  console.log(cardData);
-                  setClickedWordCard(index);
-                }}
-              >
-                {cardData.backText}
-              </div>
-              <div
-                className={props.isWonVisible ? "won_visible" : "won_invisible"}
-              >
-                {cardData.frontText}
-              </div>
+              {cardData.frontText}
             </div>
-          );
-        })}
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -15,20 +15,21 @@ export default function Chapter(props) {
   const [isVisibleBack, setIsVisibleBack] = useState(false);
   const [isVisibleFront, setIsVisibleFront] = useState(false);
   const [isWonVisible, setIsWonVisible] = useState(isVisibleFront);
-  const [settings, setSettings] = useState({
+  const [dictionarySsettings, setDictionarySettings] = useState({
     firstPartState: "first_visible",
     secondPartState: "second_visible",
     thirdPartState: "third_visible",
   });
+
   // const [firstPartState, setFirstPartState] = useState("first_visible");
   // const [secondPartState, setSecondPartState] = useState("second_visible");
   // const [thirdPartState, setThirdPartState] = useState("third_visible");
 
   const sentences = props.value;
-  console.log(sentences, settings);
+  console.log(sentences, dictionarySsettings);
   // შემთხვევითად ამოირჩევა წინადადებები ყოველი თავიდან და დაიშლება ობიექტებად, რომლებიც wordsForCards მასივში მიმდევრობით ჩალაგდება
   const marksAmount = useRef(0);
-  // const settings = useRef(
+  // const dictionarySsettings = useRef(
   //   {
   //     firstPartState,
   //     secondPartState,
@@ -36,7 +37,7 @@ export default function Chapter(props) {
   //   },
   //   [newGame]
   // );
-  console.log(settings);
+  console.log(dictionarySsettings);
   const wordsForCards = useMemo(() => {
     const words = [];
     const tWords = [];
@@ -100,8 +101,6 @@ export default function Chapter(props) {
           tPunctMark: tPunctMark ? tPunctMark : "",
           id: Math.floor(Math.random() * 10000),
         };
-      } else {
-        // return console.log(index, "tWords[index] არ არსებობს");
       }
     });
   }, [newGame]);
@@ -128,13 +127,10 @@ export default function Chapter(props) {
           </div>
         </div>
         <div className="game_part_buttons">
-          {/* {openedGame===2? */}
           <button
             className={partOfGame === 0 ? "opened_game" : ""}
             onClick={() => {
               setPartOfGame(0);
-              // setPoint(0);
-              // setTries(0);
             }}
           >
             S
@@ -149,7 +145,6 @@ export default function Chapter(props) {
           >
             I
           </button>
-          {/* :openedGame===1? */}
           <button
             className={partOfGame === 2 ? "opened_game" : "closed_game"}
             onClick={() => {
@@ -171,7 +166,6 @@ export default function Chapter(props) {
             III
           </button>
           <button
-            // className={}
             onClick={() => {
               setPartOfGame(0);
               setPoint(0);
@@ -180,23 +174,16 @@ export default function Chapter(props) {
           >
             R
           </button>
-          {/* } */}
         </div>
       </div>
       <div>
         {openedGame ? (
           partOfGame === 0 ? (
             <Settings
-              // firstPartState={firstPartState}
-              // secondPartState={secondPartState}
-              // thirdPartState={thirdPartState}
-              // setFirstPartState={setFirstPartState}
-              // setSecondPartState={setSecondPartState}
-              // setThirdPartState={setThirdPartState}
               newGame={newGame}
               setNewGame={setNewGame}
-              settings={settings}
-              setSettings={setSettings}
+              dictionarySsettings={dictionarySsettings}
+              setDictionarySettings={setDictionarySettings}
               setPoint={setPoint}
               setTries={setTries}
               setPartOfGame={setPartOfGame}
@@ -208,12 +195,9 @@ export default function Chapter(props) {
               setPoint={setPoint}
               tries={tries}
               setTries={setTries}
-              firstPartState={settings.firstPartState}
-              secondPartState={settings.secondPartState}
-              thirdPartState={settings.thirdPartState}
-              // setFirstPartState={setFirstPartState}
-              // setSecondPartState={setSecondPartState}
-              // setThirdPartState={setThirdPartState}
+              firstPartState={dictionarySsettings.firstPartState}
+              secondPartState={dictionarySsettings.secondPartState}
+              thirdPartState={dictionarySsettings.thirdPartState}
               cardsData={wordsForCards}
               setPartOfGame={setPartOfGame}
               isVisibleFront={isVisibleFront}
