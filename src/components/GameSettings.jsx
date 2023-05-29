@@ -98,17 +98,10 @@ export default function Settings(props) {
             <div className={firstPartState}>სიტყვა</div>
             <div className={secondPartState}>დოშ</div>
           </div>
-          <div className="card right_card">
-            <div className={thirdPartState}>დოშ</div>
-          </div>
         </div>
         <div className="">
           <div className="card right_card">
-            <div className={sentencesThirdState}>სიტყვა</div>
-          </div>
-          <div className="card left_card">
-            <div className={sentencesSecondState}>სიტყვა</div>
-            <div className={sentencesFirstState}>დოშ</div>
+            <div className={thirdPartState}>დოშ</div>
           </div>
         </div>
       </div>
