@@ -2,6 +2,8 @@
 import "./App.css";
 import Chapter from "./components/Chapter";
 import tushetians from "./tushetians_new.json";
+
+// import tushetians from "./tushetians.json";
 // console.log(tushetians);
 
 function App() {

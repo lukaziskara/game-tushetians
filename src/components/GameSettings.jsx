@@ -45,9 +45,10 @@ export default function Settings(props) {
     setPoint,
     setTries,
     setPartOfGame,
-    settings,
-    setSettings,
+    // dictionarySettings,
+    setDictionarySettings,
   } = props;
+  const [chosenDifficulty, setChosenDifficulty] = useState(1);
   const [firstPartState, setFirstPartState] = useState(
     gameDifficulties[0].isFirstVisible
   );
@@ -57,8 +58,15 @@ export default function Settings(props) {
   const [thirdPartState, setThirdPartState] = useState(
     gameDifficulties[0].isThirdVisible
   );
-  const [chosenDifficulty, setChosenDifficulty] = useState(1);
-  console.log("rerender");
+  const [sentencesFirstState, setSentencesFirstState] =
+    useState(firstPartState);
+  const [sentencesSecondState, setSentencesSecondState] =
+    useState(secondPartState);
+  const [sentencesThirdState, setSentencesThirdState] =
+    useState(thirdPartState);
+
+  // console.log("rerender");
+  // useEffect(() => {}, [setChosenDifficulty]);
 
   return (
     <>
@@ -75,19 +83,33 @@ export default function Settings(props) {
               setFirstPartState(gameDifficulty.isFirstVisible);
               setSecondPartState(gameDifficulty.isSecondVisible);
               setThirdPartState(gameDifficulty.isThirdVisible);
+              setSentencesFirstState(gameDifficulty.isFirstVisible);
+              setSentencesSecondState(gameDifficulty.isSecondVisible);
+              setSentencesThirdState(gameDifficulty.isThirdVisible);
             }}
           >
             {index + 1}
           </div>
         ))}
       </div>
-      <div className="example">
-        <div className="card left_card">
-          <div className={firstPartState}>სიტყვა</div>
-          <div className={secondPartState}>დოშ</div>
+      <div className="examples">
+        <div className="">
+          <div className="card left_card">
+            <div className={firstPartState}>სიტყვა</div>
+            <div className={secondPartState}>დოშ</div>
+          </div>
+          <div className="card right_card">
+            <div className={thirdPartState}>დოშ</div>
+          </div>
         </div>
-        <div className="card right_card">
-          <div className={thirdPartState}>დოშ</div>
+        <div className="">
+          <div className="card right_card">
+            <div className={sentencesThirdState}>სიტყვა</div>
+          </div>
+          <div className="card left_card">
+            <div className={sentencesSecondState}>სიტყვა</div>
+            <div className={sentencesFirstState}>დოშ</div>
+          </div>
         </div>
       </div>
       <button
@@ -96,7 +118,7 @@ export default function Settings(props) {
           setTries(0);
           setPartOfGame(1);
           setNewGame(newGame + 1);
-          setSettings({
+          setDictionarySettings({
             firstPartState: firstPartState,
             secondPartState: secondPartState,
             thirdPartState: thirdPartState,

@@ -4,6 +4,7 @@ import RightCard from "./RightCard";
 import React from "react";
 
 export default function Dictionary(props) {
+  console.log(props);
   const {
     newGame,
     setPartOfGame,
@@ -22,7 +23,7 @@ export default function Dictionary(props) {
   const cardsData = props.cardsData;
   const startingWords = useRef(cardsData.length);
   // const wonWords = useRef([1,2,3]);
-  // console.log("cardsData",typeof(cardsData),cardsData, cardsData.length)
+  console.log("cardsData", typeof cardsData, cardsData, cardsData.length);
   const [clickedRightCardId, setClickedRightCardId] = useState();
   const [clickedLeftCardId, setClickedLeftCardId] = useState();
   const [visibleBackIndex, setVisibleBackIndex] = useState();
@@ -40,7 +41,7 @@ export default function Dictionary(props) {
       .sort(() => 0.5 - Math.random());
   }, []);
   const shuffledDataForRight = useMemo(() => {
-    console.log("dasfsnjkbnjjhbjhbjhbjh");
+    // console.log("dasfsnjkbnjjhbjhbjhbjh");
     return cardsData
       .map((cardData) => {
         return {
@@ -51,7 +52,7 @@ export default function Dictionary(props) {
       })
       .sort(() => 0.5 - Math.random());
   }, []);
-  // console.log(shuffledDataForLeft,shuffledDataForRight)
+  console.log(shuffledDataForLeft, shuffledDataForRight);
   // console.log(wonWords)
   return (
     <>
