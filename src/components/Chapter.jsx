@@ -8,7 +8,7 @@ import Settings from "./GameSettings";
 export default function Chapter(props) {
   const [point, setPoint] = useState(0);
   const [tries, setTries] = useState(0);
-  // console.log(props);
+  console.log(props);
   const [openedGame, setOpenedGame] = useState(false);
   const [partOfGame, setPartOfGame] = useState(0);
   const [newGame, setNewGame] = useState(0);
@@ -44,10 +44,11 @@ export default function Chapter(props) {
     console.log(newGame);
     for (let i = 0; i < sentences.length; i++) {
       const sentence = sentences[i].sentence;
-      const translation = sentences[i].translation;
+      const translatedWords = sentences[i].tWords;
       words.push(...sentence.split(" "));
-      tWords.push(...translation.split(" "));
+      tWords.push(...translatedWords.split("@"));
     }
+    console.log(tWords);
     return words.map((value, index) => {
       let newWord;
       let newTrWord;
