@@ -4,17 +4,21 @@ export default function CreateSentences(props) {
   console.log(props);
   const cardsData = props.cardsData;
   const sentences = props.sentences;
-  console.log(props);
+  // console.log(props);
   const [clickedSentence, setClickedSentence] = useState(false);
   const [clickedWordCard, setClickedWordCard] = useState(false);
-  const bWord = useRef(() => {
-    return console.log("hello from useref");
-  });
+  // const bWord = useRef(() => {
+  //   return console.log("hello from useref");
+  // });
 
   return (
     <div className="words_and_sentences">
       <div className="sentences">
         {sentences.map((sentence, index) => {
+          const words = sentence.words.split("@");
+          const tWords = sentence.tWords.split("@");
+          const globalIndex = sentence.index;
+          console.log(sentence, words, tWords);
           return (
             <div className="test">
               <div
@@ -31,35 +35,41 @@ export default function CreateSentences(props) {
                 {sentence.translation}
               </div>
               <div className="flex_wrap">
-                {cardsData.map((cardData, index) => (
-                  <div
-                    className={
-                      clickedWordCard === index
-                        ? "word_for_sentence clicked_word_for_sentence"
-                        : "card"
-                    }
-                    onClick={() => {
-                      console.log(cardData);
-                      setClickedWordCard(index);
-                    }}
-                  >
+                {words.map((word, localIndex) => {
+                  const fullIndex =
+                    "s" + `${globalIndex}` + "w" + `${localIndex}`;
+                  // console.log(globalIndex, localIndex, fullIndex);
+                  return (
                     <div
                       className={
-                        props.isWonVisible ? "won_visible" : "won_invisible"
+                        clickedWordCard === fullIndex
+                          ? "word_for_sentence clicked_word_for_sentence"
+                          : "card"
                       }
+                      onClick={() => {
+                        console.log(word);
+                        setClickedWordCard(fullIndex);
+                      }}
                     >
-                      {cardData.frontText}
+                      <div
+                        className={
+                          props.isWonVisible ? "won_visible" : "won_invisible"
+                        }
+                      >
+                        {word}
+                      </div>
+                      <div className="">{word.backText}</div>
+                      <div className="">{tWords[localIndex]}</div>
                     </div>
-                    <div className="">{cardData.backText}</div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           );
         })}
       </div>
       <div className="words_for_sentence">
-        {cardsData.map((cardData, index) => (
+        {cardsData.map((word, index) => (
           <div
             className={
               clickedWordCard === index
@@ -67,15 +77,15 @@ export default function CreateSentences(props) {
                 : "card"
             }
             onClick={() => {
-              console.log(cardData);
+              console.log(word);
               setClickedWordCard(index);
             }}
           >
-            <div className="">{cardData.backText}</div>
+            <div className="">{word.backText}</div>
             <div
               className={props.isWonVisible ? "won_visible" : "won_invisible"}
             >
-              {cardData.frontText}
+              {word.frontText}
             </div>
           </div>
         ))}
