@@ -26,9 +26,8 @@ export default function Chapter(props) {
   // const [thirdPartState, setThirdPartState] = useState("third_visible");
 
   const sentences = props.value;
-  // console.log(sentences, dictionarySsettings);
+  console.log(sentences, dictionarySsettings);
   // შემთხვევითად ამოირჩევა წინადადებები ყოველი თავიდან და დაიშლება ობიექტებად, რომლებიც wordsForCards მასივში მიმდევრობით ჩალაგდება
-  const iSentence = useRef();
   const marksAmount = useRef(0);
   // const dictionarySsettings = useRef(
   //   {
@@ -38,43 +37,20 @@ export default function Chapter(props) {
   //   },
   //   [newGame]
   // );
-  // console.log(dictionarySsettings);
+  console.log(dictionarySsettings);
   const wordsForCards = useMemo(() => {
     const words = [];
     const tWords = [];
     //
+    console.log(newGame);
     for (let i = 0; i < sentences.length; i++) {
-      iSentence.current = i;
-      console.log("sentence", iSentence);
       const sentence = sentences[i].sentence;
       const translatedWords = sentences[i].tWords;
-      const test = sentence.split(" ").map((word, index) => {
-        return {
-          word,
-          isBack: false,
-          sentenceIndex: i,
-        };
-      });
-      // words.push(
-      //   ...sentence.split(" ").map((word, index) => {
-      //     return {
-      //       word,
-      //       isBack: false,
-      //     };
-      //   })
-      // );
       words.push(...sentence.split(" "));
-      tWords.push(
-        ...translatedWords.split("@").map((tWord, index) => ({
-          tWord,
-          isBack: false,
-          sentenceIndex: i,
-        }))
-      );
+      tWords.push(...translatedWords.split("@"));
     }
     console.log(tWords);
     return words.map((value, index) => {
-      // console.log("word", index);
       let newWord;
       let newTrWord;
       let bPunctMark;
@@ -85,18 +61,18 @@ export default function Chapter(props) {
         marksAmount.current += 1;
         bPunctMark = signsArray[signsArray.length - 1];
         newWord = words[index].substring(0, words[index].length - 1);
-        // if (tWords[index]) {
-        //   // newTrWord = tWords[index];
-        //   // newWord = words[index].substring(0, words[index].length - 1);
-        // }
+        if (tWords[index]) {
+          // newTrWord = tWords[index];
+          // newWord = words[index].substring(0, words[index].length - 1);
+        }
         // words[index] = "dawfsef"
         // console.log(bPunctMark,words[index].length,words[index],"newTrWord",newTrWord)
       } else {
         newWord = words[index];
-        // if (tWords[index]) {
-        // }
+        if (tWords[index]) {
+        }
       }
-      newTrWord = tWords[index].tWord;
+      newTrWord = tWords[index];
       // console.log(newWord,words[index],newTrWord, marksAmount, "marksAmount")
       // for (let i = 0; i < signsArray.length; i++) {
       //     // (signsArray[i] === "ࣿ") ?
@@ -124,15 +100,11 @@ export default function Chapter(props) {
           bPunctMark: bPunctMark ? bPunctMark : null,
           frontText: newTrWord,
           tPunctMark: tPunctMark ? tPunctMark : "",
-          sentenceIndex: tWords[index].sentenceIndex,
-          // id: Math.floor(Math.random() * 10000),
-          id: `s` + `${iSentence.current}` + `w` + `${index}`,
-          isBack: false,
+          id: Math.floor(Math.random() * 10000),
         };
       }
     });
   }, [newGame]);
-  console.log(wordsForCards);
   return (
     <div className="chapter">
       <div className="topic-div">

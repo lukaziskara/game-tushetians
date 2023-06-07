@@ -4,7 +4,7 @@ import RightCard from "./RightCard";
 import React from "react";
 
 export default function Dictionary(props) {
-  // console.log(props);
+  console.log(props);
   const {
     newGame,
     setPartOfGame,
@@ -52,7 +52,7 @@ export default function Dictionary(props) {
       })
       .sort(() => 0.5 - Math.random());
   }, []);
-  // console.log(shuffledDataForLeft, shuffledDataForRight);
+  console.log(shuffledDataForLeft, shuffledDataForRight);
   // console.log(wonWords)
   return (
     <>
@@ -70,9 +70,9 @@ export default function Dictionary(props) {
                   // leftBack.current = "dwafesdr"
                   leftBack.current = cardData.backText;
                   frontTextId.current = index;
-                  // console.log(backTextId.current, shuffledDataForRight);
+                  console.log(backTextId.current, shuffledDataForRight);
                   // if(leftBack.current==rightBack.current){
-                  // console.log(rightBack.current);
+                  console.log(rightBack.current);
                   if (leftBack.current === rightBack.current) {
                     props.setPoint(props.point + 1);
                     props.setTries(props.tries + 1);
@@ -102,7 +102,6 @@ export default function Dictionary(props) {
                   ? "card clicked_right"
                   : "card right_card"
               }
-              id={cardData.id}
               onClick={() => {
                 rightBack.current = cardData.backText;
                 backTextId.current = index;

@@ -1,3 +1,7 @@
+/* *{
+    margin: 0;
+    padding: 0;
+  } */
 p {
   text-align: center;
   margin: auto;
@@ -11,6 +15,7 @@ p {
   margin: 1em 0.1em;
   padding: 0.7em 0.3em;
   background-color: rgba(52, 70, 136, 0.839);
+  /* box-shadow: 3px 8px 39px -5px rgba(74,74,74,0.78); */
   border-radius: 10px;
   width: auto;
 }
@@ -210,9 +215,6 @@ button {
 .clicked_mark {
   background-color: aquamarine;
 }
-.word_returned {
-  background-color: green;
-}
 .span_element {
   /* background-color: rgb(8, 0, 255); */
   margin-top: 10px;
@@ -244,14 +246,11 @@ button {
   flex-wrap: wrap;
 }
 .word_for_sentence {
-  /* background-color: #82874d; */
+  background-color: #82874d;
   padding: 0.3em;
   margin: 0.3em;
   border-radius: 0.3em;
   cursor: pointer;
-}
-.clicked_word_for_sentence {
-  background-color: #91764a;
 }
 .won_invisible {
   color: #82874d;
