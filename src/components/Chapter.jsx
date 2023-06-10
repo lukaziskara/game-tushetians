@@ -132,6 +132,30 @@ export default function Chapter(props) {
       }
     });
   }, [newGame]);
+  // const wordsForCS = useMemo(() => {
+  //   console.log("useMemo", sentences);
+  //   return sentences.map((sentence, index) => {
+  //     const words = sentence.words.split("@");
+  //     return sentence.tWords.split("@").map((tWord, index) => ({
+  //       word: words[index],
+  //       tWord,
+  //       isBack: false,
+  //       sentenceIndex: index,
+  //     }));
+  //   });
+  // }, []);
+  // const shuffledDataForCS = useMemo(() => {
+  //   return wordsForCards
+  //     .map((cardData) => {
+  //       // console.log(cardData)
+  //       return {
+  //         frontText: cardData.frontText,
+  //         backText: cardData.backText,
+  //         id: cardData.id,
+  //       };
+  //     })
+  //     .sort(() => 0.5 - Math.random());
+  // }, []);
   console.log(wordsForCards);
   return (
     <div className="chapter">
@@ -239,7 +263,9 @@ export default function Chapter(props) {
               setPoint={setPoint}
               tries={tries}
               setTries={setTries}
-              cardsData={wordsForCards}
+              // shuffledDataForCS={shuffledDataForCS}
+              // wordsForCS={wordsForCS}
+              wordsForCards={wordsForCards}
               isWonVisible={isWonVisible}
               sentences={sentences}
             />

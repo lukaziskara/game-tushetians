@@ -165,9 +165,19 @@ button {
 }
 
 /* ////////////////////////////////WordsAndMarks//////////////////////////////////////////////////////// */
-.flex_wrap {
+.build_here {
   display: flex;
   flex-wrap: wrap;
+}
+.flex_between {
+  display: flex;
+  justify-content: space-between;
+}
+.display_none {
+  display: none;
+}
+.test {
+  background-color: #543a17;
 }
 .words_and_marks {
   display: flex;

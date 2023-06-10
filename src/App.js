@@ -17,10 +17,10 @@ function App() {
             Math.random() * chapter.sentences.length
           );
           randomSentences.push(chapter.sentences[randomNumber]);
-          console.log(chapter.sentences.length);
+          // console.log(chapter.sentences.length);
           chapter.sentences.splice(randomNumber, 1);
-          console.log(chapter.sentences.length);
-          console.log(chapter.sentences[randomNumber]);
+          // console.log(chapter.sentences.length);
+          // console.log(chapter.sentences[randomNumber]);
         }
         // console.log(index,"chapter", chapter.topic,randomSentences)
         return (
