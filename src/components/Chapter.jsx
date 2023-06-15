@@ -3,6 +3,7 @@ import "./Components.css";
 import Dictionary from "./Dictionary";
 import WordsAndMarks from "./WordsAndMarks";
 import CreateSentences from "./CreateSentences";
+import PartOfSpeech from "./PartsOfSpeech";
 import Settings from "./GameSettings";
 //კომპონენტს props-ებად მოეწოდება: value-შემთხვევითად არჩეული წინადადებები,
 export default function Chapter(props) {
@@ -14,7 +15,7 @@ export default function Chapter(props) {
   const [newGame, setNewGame] = useState(0);
   const [isVisibleBack, setIsVisibleBack] = useState(false);
   const [isVisibleFront, setIsVisibleFront] = useState(false);
-  const [isWonVisible, setIsWonVisible] = useState(isVisibleFront);
+  const [isBackVisible, setIsBackVisible] = useState(isVisibleFront);
   const [dictionarySsettings, setDictionarySettings] = useState({
     firstPartState: "first_visible",
     secondPartState: "second_visible",
@@ -219,6 +220,16 @@ export default function Chapter(props) {
             III
           </button>
           <button
+            className={partOfGame === 4 ? "opened_game" : "closed_game"}
+            onClick={() => {
+              setPartOfGame(4);
+              setPoint(0);
+              setTries(0);
+            }}
+          >
+            IV
+          </button>
+          <button
             onClick={() => {
               setPartOfGame(0);
               setPoint(0);
@@ -266,8 +277,9 @@ export default function Chapter(props) {
               // shuffledDataForCS={shuffledDataForCS}
               // wordsForCS={wordsForCS}
               wordsForCards={wordsForCards}
-              isWonVisible={isWonVisible}
+              isBackVisible={isBackVisible}
               sentences={sentences}
+              setPartOfGame={setPartOfGame}
             />
           ) : partOfGame === 3 ? (
             <WordsAndMarks
@@ -277,6 +289,15 @@ export default function Chapter(props) {
               setTries={setTries}
               cardsData={wordsForCards}
               marksAmount={marksAmount.current}
+            />
+          ) : partOfGame === 4 ? (
+            <PartOfSpeech
+              // point={point}
+              // setPoint={setPoint}
+              // tries={tries}
+              // setTries={setTries}
+              // cardsData={wordsForCards}
+              // marksAmount={marksAmount.current}
             />
           ) : (
             console.log(openedGame)

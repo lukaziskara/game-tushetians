@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 export default function CreateSentences(props) {
-  const { point, setPoint, tries, setTries, wordsForCards } = props;
+  const { point, setPoint, tries, setTries, wordsForCards, setPartOfGame } = props;
   // const cardsData = props.cardsData;
   const sentences = props.sentences;
   // console.log(props, cardsData);
@@ -11,11 +11,21 @@ export default function CreateSentences(props) {
   const [clickedWord, setClickedWord] = useState(false);
   const [wordReturned, setWordReturned] = useState(false);
   const [clickedWordToReturnId, setClickedWordToReturnId] = useState();
+  // const [, setGameOver] = useState()
 
   const chosenPlaceHolder = useRef();
   const wordToReturn = useRef();
+  const chosenSentenceState = useRef([false, false, false, false]);
   const chosenPlaceHolderId = useRef([0, 0, 0, 0]);
   const wordToReturnId = useRef();
+  const isCorrect = useRef(1);
+  const fullOrFill = useRef([
+    "to_fill_sentence",
+    "to_fill_sentence",
+    "to_fill_sentence",
+    "to_fill_sentence",
+  ]);
+  const sentenceToGo = useRef(4);
 
   const wordsForCS = useMemo(() => {
     console.log("useMemo", sentences);
@@ -51,13 +61,17 @@ export default function CreateSentences(props) {
   }, []);
 
   // function tryHandler() {
-  //   // console.log(localIndex);
   // }
   useEffect(() => {
     if (
       chosenPlaceHolderId.current[clickedSentence] <
-      wordsForCS[clickedSentence].length - 1
+      wordsForCS[clickedSentence].length
     ) {
+      console.log(
+        wordsForCS[clickedSentence][
+          chosenPlaceHolderId.current[clickedSentence]
+        ].word
+      );
       chosenPlaceHolder.current =
         wordsForCS[clickedSentence][
           chosenPlaceHolderId.current[clickedSentence]
@@ -75,15 +89,23 @@ export default function CreateSentences(props) {
           //   sentenceIndex,
           // }));
           const globalIndex = sentenceIndex;
-          // console.log(sentence, words, tWords, "dwadwa");
+          console.log(
+            sentence,
+            words,
+            "dwadwa",
+            chosenPlaceHolderId.current[clickedSentence]
+          );
           return (
-            <div className="test">
+            <div
+              className={
+                clickedSentence === sentenceIndex
+                  ? `${fullOrFill.current[clickedSentence]}` +
+                    " clicked_sentence"
+                  : `${fullOrFill.current[sentenceIndex]}` + " cursor_pointer"
+              }
+            >
               <div
-                className={
-                  clickedSentence === sentenceIndex
-                    ? "full_sentence clicked_Sentence"
-                    : "full_sentence"
-                }
+                className="to_translate"
                 onClick={() => {
                   // console.log(sentence);
                   setClickedSentence(sentenceIndex);
@@ -118,46 +140,68 @@ export default function CreateSentences(props) {
                               chosenPlaceHolderId.current[clickedSentence] ===
                                 localIndex
                             ? "word_for_sentence clicked_word_for_sentence"
-                            : "card"
+                            : "word_for_sentence"
                         }
                       >
+                        <div className="">
+                          {wordsForCS[sentenceIndex][localIndex].tWord}
+                        </div>
                         <div
                           className={
-                            props.isWonVisible ? "won_visible" : "won_invisible"
+                            props.isBackVisible
+                              ? "back_visible"
+                              : "back_invisible"
                           }
                         >
                           {word}
                         </div>
                         {/* <div className="">{word.backText}</div> */}
-                        <div className="">
-                          {wordsForCS[sentenceIndex][localIndex].tWord}
-                        </div>
                       </div>
                     );
                   })}
                 </div>
                 <button
+                  className={
+                    chosenSentenceState.current[clickedSentence]
+                      ? ".full_sentence_button"
+                      : ""
+                  }
                   onClick={() => {
                     console.log(
-                      sentenceIndex,
+                      sentence.sentence.split(" ").length,
                       chosenPlaceHolderId.current[clickedSentence],
-                      sentence.sentence
+                      isCorrect.current,
+                      !chosenSentenceState.current[clickedSentence]
                     );
                     if (
                       sentence.sentence.split(" ").length ===
-                      chosenPlaceHolderId.current[clickedSentence]
+                        chosenPlaceHolderId.current[clickedSentence] &&
+                      // isCorrect.current &&
+                      !chosenSentenceState.current[clickedSentence]
                     ) {
+                      setPoint(
+                        point + chosenPlaceHolderId.current[clickedSentence]
+                      );
+                      chosenSentenceState.current[clickedSentence] = true;
+                      // setTries(
+                      //   tries + chosenPlaceHolderId.current[clickedSentence]
+                      // );
                       console.log(
                         sentenceIndex,
                         chosenPlaceHolderId.current[clickedSentence],
-                        sentence.sentence
+                        sentence.sentence,
+                        fullOrFill.current
                       );
+                      fullOrFill.current[clickedSentence] = "full_sentence";
+                      sentenceToGo.current--;
                     } else {
-                      console.log("წინადადება სრული არაა.");
+                      console.log("წინადადება სრული არაა ან უკვე გათამაშდა.");
                     }
                   }}
                 >
-                  ცდა
+                  {chosenSentenceState.current[clickedSentence]
+                    ? "შევსებულია"
+                    : "ცდა"}
                 </button>
               </div>
             </div>
@@ -169,54 +213,89 @@ export default function CreateSentences(props) {
           <div
             className={
               clickedWord === word.id
-                ? "word_for_sentence clicked_word_for_sentence"
-                : "card"
+                ? "card_to_choose clicked_card_to_choose"
+                : "card_to_choose"
             }
             onClick={() => {
               wordToReturn.current = word.backText;
-              console.log(word, word.id);
+              // console.log(word, word.id);
               setClickedWord(word.id);
               wordToReturnId.current = index;
-              if (wordToReturn.current === chosenPlaceHolder.current) {
-                wordsForCS[clickedSentence][
-                  chosenPlaceHolderId.current[clickedSentence]
-                ].isBack = true;
-                console.log("daeklikaaa", clickedSentence);
-                if (
-                  chosenPlaceHolderId.current[clickedSentence] <
-                  wordsForCS[clickedSentence].length - 1
-                ) {
-                  console.log(clickedSentence);
-                  chosenPlaceHolderId.current[clickedSentence] =
-                    chosenPlaceHolderId.current[clickedSentence] + 1;
-                  chosenPlaceHolder.current =
-                    wordsForCS[clickedSentence][
-                      chosenPlaceHolderId.current[clickedSentence]
-                    ].word;
+              console.log(
+                "daeklikaaa",
+                clickedSentence,
+                wordToReturn.current,
+                chosenPlaceHolder.current
+                // wordsForCS[clickedSentence][
+                //   chosenPlaceHolderId.current[clickedSentence]
+                // ].word
+              );
+              if (
+                chosenPlaceHolderId.current[clickedSentence] <
+                wordsForCS[clickedSentence].length
+              ) {
+                chosenPlaceHolder.current =
+                  wordsForCS[clickedSentence][
+                    chosenPlaceHolderId.current[clickedSentence]
+                  ].word;
+                if (wordToReturn.current === chosenPlaceHolder.current) {
+                  isCorrect.current *= 1;
+                  console.log("დაემთხვა", isCorrect.current);
+                  wordsForCS[clickedSentence][
+                    chosenPlaceHolderId.current[clickedSentence]
+                  ].isBack = true;
+                  console.log(
+                    chosenPlaceHolder.current,
+                    wordsForCS[clickedSentence].length,
+                    chosenPlaceHolderId.current[clickedSentence],
+                    "დაემატა",
+                    [1, 2] === [1, 2]
+                  );
+                  chosenPlaceHolderId.current[clickedSentence]++;
+                  // chosenPlaceHolderId.current[clickedSentence] + 1;
+                  shuffledDataForCS.splice(index, 1);
+                  setTries(tries + 1);
                 } else {
-                  chosenPlaceHolder.current = null;
-                  console.log(clickedSentence);
+                  isCorrect.current *= 0;
+                  console.log("არ დაემთხვა", isCorrect.current);
+                  setTries(tries + 1);
                 }
+              } else {
+                chosenPlaceHolder.current = null;
                 console.log(clickedSentence);
-                // console.log(wordToReturn.current, "დაემთხვა");
-                setClickedWordToReturnId(word.id);
-                setPoint(point + 1);
-                setTries(tries + 1);
-                // ქვედა რიგში წასაშლელია და ზემოთ გასაფერადებელი.
-                shuffledDataForCS.splice(index, 1);
-                // shuffledDataForCS.splice(wordToReturnId.current, 1);
               }
+              // console.log(clickedSentence);
+              // console.log(wordToReturn.current, "დაემთხვა");
+              // setClickedWordToReturnId(word.id);
+              // setPoint(point + 1);
+              // setTries(tries + 1);
+              // ქვედა რიგში წასაშლელია და ზემოთ გასაფერადებელი.
+              // shuffledDataForCS.splice(wordToReturnId.current, 1);
             }}
           >
             <div className="">{word.backText}</div>
-            <div
-              className={props.isWonVisible ? "won_visible" : "won_invisible"}
+            {/* <div
+              className={propBack ? "won_visible" : "won_invisible"}
             >
               {word.frontText}
-            </div>
+            </div> */}
           </div>
         ))}
       </div>
+      <div className="next_game">
+          {sentenceToGo.current === 0 ? (
+            // <div className="next">შემდეგი თამაში</div>
+            <button onClick={() => setPartOfGame(3)}>შემდეგი თამაში</button>
+          ) : (
+            // : <div className="">თამაში</div>}
+            console.log(
+              "არ დასრულებულა"
+              // wonWords.length,
+              // wonWords.length === 2,
+              // startingWords.current
+            )
+          )}
+        </div>
     </div>
   );
 }

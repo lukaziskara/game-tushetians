@@ -10,6 +10,6 @@ body{
 .App {
   background-color: rgb(95, 96, 95);
   text-align: center;
-  width: 100%;
-  max-width: 1000px;
+  width: 90%;
+  /* max-width: 1000px; */
 }

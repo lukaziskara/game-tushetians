@@ -109,6 +109,7 @@ button {
   /* height: 1em; */
 }
 .card {
+  background-color: #69706c;
   border-radius: 0.3em;
   width: fit-content;
   padding: 0.3em;
@@ -177,7 +178,8 @@ button {
   display: none;
 }
 .test {
-  background-color: #543a17;
+  background-color: #806722;
+  margin: .3em;
 }
 .words_and_marks {
   display: flex;
@@ -221,7 +223,7 @@ button {
   background-color: aquamarine;
 }
 .word_returned {
-  background-color: green;
+  background-color: rgb(199, 199, 199);
 }
 .span_element {
   /* background-color: rgb(8, 0, 255); */
@@ -236,17 +238,59 @@ button {
   background-color: grey;
 }
 .sentences {
-  background-color: rgb(150, 156, 161);
+  background-color: rgb(170, 168, 161);
+  padding: .3em;
+}
+/* .sentence{
+
+} */
+.to_translate {
+  padding: .3em;
+}
+.full_sentence_button {
+  background-color: green;
 }
 .full_sentence {
-  background-color: #82874d;
+  background-color: #3d5e7e;
   padding: 0.3em;
   margin: 0.3em;
   border-radius: 0.3em;
+}
+.clicked_card_to_choose {
+  background-color: #69706c;
+  border-radius: 0.3em;
+  width: fit-content;
+  padding: 0.3em;
+  margin: 5px;
+  cursor: pointer;
+  transition: all 0.3 ease-in-out;
+  height: fit-content;
+}
+.card_to_choose {
+  background-color: #69706c;
+  border-radius: 0.3em;
+  width: fit-content;
+  padding: 0.3em;
+  margin: 5px;
+  cursor: pointer;
+  transition: all 0.3 ease-in-out;
+  height: fit-content;
+}
+.clicked_card_to_choose {
+  background-color: #030303;
+}
+.cursor_pointer{
   cursor: pointer;
 }
-.clicked_Sentence {
-  background-color: #91764a;
+.to_fill_sentence{
+  background-color: #69706c;
+  margin: .3em;
+}
+/* .full_sentence{
+  background-color: rgb(26, 41, 73);
+} */
+.clicked_sentence {
+  /* background-color: #91764a; */
 }
 .words_for_sentence {
   background-color: rgb(20, 112, 23);
@@ -261,10 +305,11 @@ button {
   cursor: pointer;
 }
 .clicked_word_for_sentence {
-  background-color: #91764a;
+  background-color: #72773b;
 }
-.won_invisible {
-  color: #82874d;
+
+.back_invisible {
+  color: #72773b;
 }
 .word_card {
   background-color: green;
