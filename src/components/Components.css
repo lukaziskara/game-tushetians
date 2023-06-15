@@ -222,9 +222,6 @@ button {
 .clicked_mark {
   background-color: aquamarine;
 }
-.word_returned {
-  background-color: rgb(199, 199, 199);
-}
 .span_element {
   /* background-color: rgb(8, 0, 255); */
   margin-top: 10px;
@@ -297,8 +294,15 @@ button {
   display: flex;
   flex-wrap: wrap;
 }
+.word_returned {
+  /* background-color: #547753; */
+  padding: 0.3em;
+  margin: 0.3em;
+  border-radius: 0.3em;
+  cursor: pointer;
+}
 .word_for_sentence {
-  /* background-color: #82874d; */
+  background-color: #547753;
   padding: 0.3em;
   margin: 0.3em;
   border-radius: 0.3em;

@@ -135,7 +135,7 @@ export default function CreateSentences(props) {
                       <div
                         className={
                           wordsForCS[sentenceIndex][localIndex].isBack
-                            ? "word_for_sentence word_returned"
+                            ? "word_returned"
                             : clickedSentence === sentenceIndex &&
                               chosenPlaceHolderId.current[clickedSentence] ===
                                 localIndex
