@@ -28,6 +28,8 @@ export default function Dictionary(props) {
   const [clickedLeftCardId, setClickedLeftCardId] = useState();
   const [visibleBackIndex, setVisibleBackIndex] = useState();
   const [clickedSentence, setClickedSentence] = useState(false);
+  const [isSecond, setIsSecond] = useState(false);
+
   const shuffledDataForLeft = useMemo(() => {
     return cardsData
       .map((cardData) => {
@@ -71,8 +73,9 @@ export default function Dictionary(props) {
                   leftBack.current = cardData.backText;
                   frontTextId.current = index;
                   // console.log(backTextId.current, shuffledDataForRight);
-                  // if(leftBack.current==rightBack.current){
-                  // console.log(rightBack.current);
+                  if (leftBack.current === rightBack.current) {
+                    console.log(rightBack.current);
+                  }
                   if (leftBack.current === rightBack.current) {
                     props.setPoint(props.point + 1);
                     props.setTries(props.tries + 1);
@@ -81,8 +84,16 @@ export default function Dictionary(props) {
                     shuffledDataForRight.splice(backTextId.current, 1);
                     rightBack.current = null;
                     leftBack.current = null;
+                    if (isSecond) {
+                      setIsSecond(false);
+                    }
                   } else {
-                    props.setTries(props.tries + 1);
+                    if (isSecond) {
+                      props.setTries(props.tries + 1);
+                      console.log(isSecond);
+                    } else {
+                      setIsSecond(true);
+                    }
                   }
                   setClickedLeftCardId(cardData.id);
                 }}
@@ -116,8 +127,16 @@ export default function Dictionary(props) {
                   shuffledDataForRight.splice(backTextId.current, 1);
                   rightBack.current = null;
                   leftBack.current = null;
+                  if (isSecond) {
+                    setIsSecond(false);
+                  }
                 } else {
-                  props.setTries(props.tries + 1);
+                  if (isSecond) {
+                    props.setTries(props.tries + 1);
+                    console.log(isSecond);
+                  } else {
+                    setIsSecond(true);
+                  }
                 }
               }}
             >

@@ -1,17 +1,17 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 export default function CreateSentences(props) {
-  const { point, setPoint, tries, setTries, wordsForCards, setPartOfGame } = props;
+  const { point, setPoint, tries, setTries, wordsForCards, setPartOfGame } =
+    props;
   // const cardsData = props.cardsData;
   const sentences = props.sentences;
   // console.log(props, cardsData);
   const [clickedSentence, setClickedSentence] = useState(0);
   const [clickedWordPlace, setClickedWordPlace] = useState("s0w0");
-  console.log(clickedWordPlace);
   const [clickedWord, setClickedWord] = useState(false);
   const [wordReturned, setWordReturned] = useState(false);
   const [clickedWordToReturnId, setClickedWordToReturnId] = useState();
-  // const [, setGameOver] = useState()
+  const [changed, setChanged] = useState(0);
 
   const chosenPlaceHolder = useRef();
   const wordToReturn = useRef();
@@ -39,6 +39,11 @@ export default function CreateSentences(props) {
       }));
     });
   }, []);
+  console.log(
+    clickedWordPlace,
+    wordsForCS[clickedSentence],
+    chosenPlaceHolderId.current[clickedSentence]
+  );
 
   console.log(
     wordsForCards,
@@ -148,7 +153,7 @@ export default function CreateSentences(props) {
                         </div>
                         <div
                           className={
-                            props.isBackVisible
+                            wordsForCS[sentenceIndex][localIndex].isBack
                               ? "back_visible"
                               : "back_invisible"
                           }
@@ -179,9 +184,9 @@ export default function CreateSentences(props) {
                       // isCorrect.current &&
                       !chosenSentenceState.current[clickedSentence]
                     ) {
-                      setPoint(
-                        point + chosenPlaceHolderId.current[clickedSentence]
-                      );
+                      // setPoint(
+                      //   point + chosenPlaceHolderId.current[clickedSentence]
+                      // );
                       chosenSentenceState.current[clickedSentence] = true;
                       // setTries(
                       //   tries + chosenPlaceHolderId.current[clickedSentence]
@@ -194,6 +199,7 @@ export default function CreateSentences(props) {
                       );
                       fullOrFill.current[clickedSentence] = "full_sentence";
                       sentenceToGo.current--;
+                      setChanged(!changed);
                     } else {
                       console.log("წინადადება სრული არაა ან უკვე გათამაშდა.");
                     }
@@ -240,10 +246,16 @@ export default function CreateSentences(props) {
                   ].word;
                 if (wordToReturn.current === chosenPlaceHolder.current) {
                   isCorrect.current *= 1;
-                  console.log("დაემთხვა", isCorrect.current);
                   wordsForCS[clickedSentence][
                     chosenPlaceHolderId.current[clickedSentence]
                   ].isBack = true;
+                  console.log(
+                    "დაემთხვა",
+                    isCorrect.current,
+                    wordsForCS[clickedSentence][
+                      chosenPlaceHolderId.current[clickedSentence]
+                    ].isBack
+                  );
                   console.log(
                     chosenPlaceHolder.current,
                     wordsForCS[clickedSentence].length,
@@ -254,6 +266,7 @@ export default function CreateSentences(props) {
                   chosenPlaceHolderId.current[clickedSentence]++;
                   // chosenPlaceHolderId.current[clickedSentence] + 1;
                   shuffledDataForCS.splice(index, 1);
+                  setPoint(point + 1);
                   setTries(tries + 1);
                 } else {
                   isCorrect.current *= 0;
@@ -283,19 +296,19 @@ export default function CreateSentences(props) {
         ))}
       </div>
       <div className="next_game">
-          {sentenceToGo.current === 0 ? (
-            // <div className="next">შემდეგი თამაში</div>
-            <button onClick={() => setPartOfGame(3)}>შემდეგი თამაში</button>
-          ) : (
-            // : <div className="">თამაში</div>}
-            console.log(
-              "არ დასრულებულა"
-              // wonWords.length,
-              // wonWords.length === 2,
-              // startingWords.current
-            )
-          )}
-        </div>
+        {sentenceToGo.current === 0 ? (
+          // <div className="next">შემდეგი თამაში</div>
+          <button onClick={() => setPartOfGame(3)}>შემდეგი თამაში</button>
+        ) : (
+          // : <div className="">თამაში</div>}
+          console.log(
+            "არ დასრულებულა"
+            // wonWords.length,
+            // wonWords.length === 2,
+            // startingWords.current
+          )
+        )}
+      </div>
     </div>
   );
 }

@@ -179,7 +179,7 @@ button {
 }
 .test {
   background-color: #806722;
-  margin: .3em;
+  margin: 0.3em;
 }
 .words_and_marks {
   display: flex;
@@ -236,13 +236,13 @@ button {
 }
 .sentences {
   background-color: rgb(170, 168, 161);
-  padding: .3em;
+  padding: 0.3em;
 }
 /* .sentence{
 
 } */
 .to_translate {
-  padding: .3em;
+  padding: 0.3em;
 }
 .full_sentence_button {
   background-color: green;
@@ -276,12 +276,12 @@ button {
 .clicked_card_to_choose {
   background-color: #030303;
 }
-.cursor_pointer{
+.cursor_pointer {
   cursor: pointer;
 }
-.to_fill_sentence{
+.to_fill_sentence {
   background-color: #69706c;
-  margin: .3em;
+  margin: 0.3em;
 }
 /* .full_sentence{
   background-color: rgb(26, 41, 73);
@@ -314,6 +314,15 @@ button {
 
 .back_invisible {
   color: #72773b;
+  background-color: #72773b;
+  padding: 0.3em;
+  border-radius: 0.3em;
+}
+.back_visible {
+  background-color: green;
+  padding: 0.3em;
+  border-radius: 0.3em;
+  /* color: black; */
 }
 .word_card {
   background-color: green;
