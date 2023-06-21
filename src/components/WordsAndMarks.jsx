@@ -1,12 +1,15 @@
 import { useMemo, useRef, useState } from "react";
 
 export default function WordsAndMarks(props) {
-  console.log(props);
+  console.log(props.marksAmount);
   const cardsData = props.cardsData;
+  // props.marksAmount
   const [clickedWord, setClickedWord] = useState();
   const [clickedMark, setClickedMark] = useState();
   const chosenMark = useRef();
   const marksAmount = useRef(props.marksAmount);
+  // marksAmount.current--;
+  console.log(props.marksAmount, marksAmount.current);
   const wordsAndMarks = useMemo(() => {
     return cardsData.map((cardData) => {
       // console.log(cardData)
@@ -83,11 +86,11 @@ export default function WordsAndMarks(props) {
       </div>
       {marksAmount.current === 0 ? (
         <div className="next">
-          <button onClick={() => props.setOpenedGame(2)}>შედეგები</button>
-          <button onClick={() => props.setOpenedGame(2)}>შემდეგი თამაში</button>
+          <button onClick={() => props.setPartOfGame(5)}>შედეგები</button>
+          <button onClick={() => props.setPartOfGame(4)}>შემდეგი თამაში</button>
         </div>
       ) : (
-        console.log(marksAmount.current)
+        console.log(marksAmount.current, "test")
       )}
     </div>
   );

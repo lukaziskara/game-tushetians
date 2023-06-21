@@ -5,6 +5,7 @@ import WordsAndMarks from "./WordsAndMarks";
 import CreateSentences from "./CreateSentences";
 import PartOfSpeech from "./PartsOfSpeech";
 import Settings from "./GameSettings";
+import Results from "./Results";
 //კომპონენტს props-ებად მოეწოდება: value-შემთხვევითად არჩეული წინადადებები,
 export default function Chapter(props) {
   const [point, setPoint] = useState(0);
@@ -27,7 +28,7 @@ export default function Chapter(props) {
   // const [thirdPartState, setThirdPartState] = useState("third_visible");
 
   const sentences = props.value;
-  // console.log(sentences, dictionarySsettings);
+  console.log(sentences);
   // შემთხვევითად ამოირჩევა წინადადებები ყოველი თავიდან და დაიშლება ობიექტებად, რომლებიც wordsForCards მასივში მიმდევრობით ჩალაგდება
   const iSentence = useRef();
   const marksAmount = useRef(0);
@@ -49,13 +50,13 @@ export default function Chapter(props) {
       console.log("sentence", iSentence);
       const sentence = sentences[i].sentence;
       const translatedWords = sentences[i].tWords;
-      const test = sentence.split(" ").map((word, index) => {
-        return {
-          word,
-          isBack: false,
-          sentenceIndex: i,
-        };
-      });
+      // const test = sentence.split(" ").map((word, index) => {
+      //   return {
+      //     word,
+      //     isBack: false,
+      //     sentenceIndex: i,
+      //   };
+      // });
       // words.push(
       //   ...sentence.split(" ").map((word, index) => {
       //     return {
@@ -75,13 +76,14 @@ export default function Chapter(props) {
     }
     console.log(tWords);
     return words.map((value, index) => {
-      // console.log("word", index);
       let newWord;
       let newTrWord;
       let bPunctMark;
       let tPunctMark;
       const signsArray = words[index].split("");
       const marks = [",", ".", ":", ";", "!", "?"];
+
+      // console.log(signsArray[signsArray.length - 1]);
       if (marks.includes(signsArray[signsArray.length - 1])) {
         marksAmount.current += 1;
         bPunctMark = signsArray[signsArray.length - 1];
@@ -91,7 +93,7 @@ export default function Chapter(props) {
         //   // newWord = words[index].substring(0, words[index].length - 1);
         // }
         // words[index] = "dawfsef"
-        // console.log(bPunctMark,words[index].length,words[index],"newTrWord",newTrWord)
+        console.log(marksAmount.current);
       } else {
         newWord = words[index];
         // if (tWords[index]) {
@@ -157,7 +159,7 @@ export default function Chapter(props) {
   //     })
   //     .sort(() => 0.5 - Math.random());
   // }, []);
-  console.log(wordsForCards);
+  console.log(wordsForCards, marksAmount.current);
   return (
     <div className="chapter">
       <div className="topic-div">
@@ -231,9 +233,10 @@ export default function Chapter(props) {
           </button>
           <button
             onClick={() => {
-              setPartOfGame(0);
-              setPoint(0);
-              setTries(0);
+              setPartOfGame(5);
+              // console.log("test");
+              // setPoint(0);
+              // setTries(0);
             }}
           >
             R
@@ -289,14 +292,24 @@ export default function Chapter(props) {
               setTries={setTries}
               cardsData={wordsForCards}
               marksAmount={marksAmount.current}
+              setPartOfGame={setPartOfGame}
             />
           ) : partOfGame === 4 ? (
             <PartOfSpeech
-              // point={point}
+            // point={point}
+            // setPoint={setPoint}
+            // tries={tries}
+            // setTries={setTries}
+            // cardsData={wordsForCards}
+            // marksAmount={marksAmount.current}
+            />
+          ) : partOfGame === 5 ? (
+            <Results
+              point={point}
               // setPoint={setPoint}
-              // tries={tries}
+              tries={tries}
               // setTries={setTries}
-              // cardsData={wordsForCards}
+              sentences={sentences}
               // marksAmount={marksAmount.current}
             />
           ) : (
