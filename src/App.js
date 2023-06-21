@@ -9,7 +9,7 @@ import tushetians from "./tushetians_new.json";
 function App() {
   console.log(tushetians);
   return (
-    <div className="App">
+    <div className="applc">
       {tushetians.map((chapter, index) => {
         const randomSentences = [];
         for (let i = 0; i < 4; i++) {
