@@ -180,7 +180,7 @@ export default function Dictionary(props) {
         <div className="next_game">
           {shuffledDataForLeft.length === 0 ? (
             // <div className="next">შემდეგი თამაში</div>
-            <button onClick={() => setPartOfGame(2)}>შემდეგი თამაში</button>
+            <button onClick={() => setPartOfGame(2)}>შემდეგი ეტაპი</button>
           ) : (
             // : <div className="">თამაში</div>}
             console.log(

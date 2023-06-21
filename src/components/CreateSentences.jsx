@@ -298,7 +298,7 @@ export default function CreateSentences(props) {
       <div className="next_game">
         {sentenceToGo.current === 0 ? (
           // <div className="next">შემდეგი თამაში</div>
-          <button onClick={() => setPartOfGame(3)}>შემდეგი თამაში</button>
+          <button onClick={() => setPartOfGame(3)}>შემდეგი ეტაპი</button>
         ) : (
           // : <div className="">თამაში</div>}
           console.log(
