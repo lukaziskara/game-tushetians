@@ -6,11 +6,14 @@ import CreateSentences from "./CreateSentences";
 import PartOfSpeech from "./PartsOfSpeech";
 import Settings from "./GameSettings";
 import Results from "./Results";
+import About from "./About";
+import about from "../about.json";
+
 //კომპონენტს props-ებად მოეწოდება: value-შემთხვევითად არჩეული წინადადებები,
 export default function Chapter(props) {
   const [point, setPoint] = useState(0);
   const [tries, setTries] = useState(0);
-  console.log(props);
+  console.log(about);
   const [openedGame, setOpenedGame] = useState(false);
   const [partOfGame, setPartOfGame] = useState(0);
   const [newGame, setNewGame] = useState(0);
@@ -233,10 +236,10 @@ export default function Chapter(props) {
           </button>
           <button
             onClick={() => {
-              setPartOfGame(5);
+              setPartOfGame(0);
               // console.log("test");
-              // setPoint(0);
-              // setTries(0);
+              setPoint(0);
+              setTries(0);
             }}
           >
             R
@@ -246,72 +249,108 @@ export default function Chapter(props) {
       <div>
         {openedGame ? (
           partOfGame === 0 ? (
-            <Settings
-              newGame={newGame}
-              setNewGame={setNewGame}
-              dictionarySsettings={dictionarySsettings}
-              setDictionarySettings={setDictionarySettings}
-              setPoint={setPoint}
-              setTries={setTries}
-              setPartOfGame={setPartOfGame}
-            />
+            <div className="">
+              <About
+                partOfGame={partOfGame}
+                desc={about.partsOfGame[partOfGame]}
+              />
+              <Settings
+                newGame={newGame}
+                setNewGame={setNewGame}
+                dictionarySsettings={dictionarySsettings}
+                setDictionarySettings={setDictionarySettings}
+                setPoint={setPoint}
+                setTries={setTries}
+                setPartOfGame={setPartOfGame}
+              />
+            </div>
           ) : partOfGame === 1 ? (
-            <Dictionary
-              newGame={newGame}
-              point={point}
-              setPoint={setPoint}
-              tries={tries}
-              setTries={setTries}
-              firstPartState={dictionarySsettings.firstPartState}
-              secondPartState={dictionarySsettings.secondPartState}
-              thirdPartState={dictionarySsettings.thirdPartState}
-              cardsData={wordsForCards}
-              setPartOfGame={setPartOfGame}
-              isVisibleFront={isVisibleFront}
-              isVisibleBack={isVisibleBack}
-              sentences={sentences}
-            />
+            <div className="">
+              <About
+                partOfGame={partOfGame}
+                desc={about.partsOfGame[partOfGame]}
+              />
+              <Dictionary
+                newGame={newGame}
+                point={point}
+                setPoint={setPoint}
+                tries={tries}
+                setTries={setTries}
+                firstPartState={dictionarySsettings.firstPartState}
+                secondPartState={dictionarySsettings.secondPartState}
+                thirdPartState={dictionarySsettings.thirdPartState}
+                cardsData={wordsForCards}
+                setPartOfGame={setPartOfGame}
+                isVisibleFront={isVisibleFront}
+                isVisibleBack={isVisibleBack}
+                sentences={sentences}
+              />
+            </div>
           ) : partOfGame === 2 ? (
-            <CreateSentences
-              point={point}
-              setPoint={setPoint}
-              tries={tries}
-              setTries={setTries}
-              // shuffledDataForCS={shuffledDataForCS}
-              // wordsForCS={wordsForCS}
-              wordsForCards={wordsForCards}
-              isBackVisible={isBackVisible}
-              sentences={sentences}
-              setPartOfGame={setPartOfGame}
-            />
+            <div className="">
+              <About
+                partOfGame={partOfGame}
+                desc={about.partsOfGame[partOfGame]}
+              />
+              <CreateSentences
+                point={point}
+                setPoint={setPoint}
+                tries={tries}
+                setTries={setTries}
+                // shuffledDataForCS={shuffledDataForCS}
+                // wordsForCS={wordsForCS}
+                wordsForCards={wordsForCards}
+                isBackVisible={isBackVisible}
+                sentences={sentences}
+                setPartOfGame={setPartOfGame}
+              />
+            </div>
           ) : partOfGame === 3 ? (
-            <WordsAndMarks
-              point={point}
-              setPoint={setPoint}
-              tries={tries}
-              setTries={setTries}
-              cardsData={wordsForCards}
-              marksAmount={marksAmount.current}
-              setPartOfGame={setPartOfGame}
-            />
+            <div className="">
+              <About
+                partOfGame={partOfGame}
+                desc={about.partsOfGame[partOfGame]}
+              />
+              <WordsAndMarks
+                point={point}
+                setPoint={setPoint}
+                tries={tries}
+                setTries={setTries}
+                cardsData={wordsForCards}
+                marksAmount={marksAmount.current}
+                setPartOfGame={setPartOfGame}
+              />
+            </div>
           ) : partOfGame === 4 ? (
-            <PartOfSpeech
-            // point={point}
-            // setPoint={setPoint}
-            // tries={tries}
-            // setTries={setTries}
-            // cardsData={wordsForCards}
-            // marksAmount={marksAmount.current}
-            />
-          ) : partOfGame === 5 ? (
-            <Results
-              point={point}
+            <div className="">
+              <About
+                partOfGame={partOfGame}
+                desc={about.partsOfGame[partOfGame]}
+              />
+              <PartOfSpeech
+              // point={point}
               // setPoint={setPoint}
-              tries={tries}
+              // tries={tries}
               // setTries={setTries}
-              sentences={sentences}
+              // cardsData={wordsForCards}
               // marksAmount={marksAmount.current}
-            />
+              />
+            </div>
+          ) : partOfGame === 5 ? (
+            <div className="">
+              <About
+                partOfGame={partOfGame}
+                desc={about.partsOfGame[partOfGame]}
+              />
+              <Results
+                point={point}
+                // setPoint={setPoint}
+                tries={tries}
+                // setTries={setTries}
+                sentences={sentences}
+                // marksAmount={marksAmount.current}
+              />
+            </div>
           ) : (
             console.log(openedGame)
           )
