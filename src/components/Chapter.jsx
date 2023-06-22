@@ -78,6 +78,7 @@ export default function Chapter(props) {
       );
     }
     console.log(tWords);
+    marksAmount.current = 0;
     return words.map((value, index) => {
       let newWord;
       let newTrWord;

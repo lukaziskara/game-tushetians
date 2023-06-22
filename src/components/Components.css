@@ -105,7 +105,7 @@ button {
 .first_invisible,
 .second_waiting {
   /* background-color: #91764a; */
-  color: #91764a;
+  color: rgb(150, 121, 47);
 }
 .right_waiting {
   background-color: green;
