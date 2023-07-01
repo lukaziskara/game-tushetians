@@ -3,7 +3,9 @@ export default function Results(props) {
   console.log(props);
   return (
     <div className="">
-      <h1>შედეგი: {Math.round((point / tries) * 100)}%</h1>
+      <h1>
+        შედეგი: {point}/{tries} = {Math.round((point / tries) * 100)}%
+      </h1>
       <div className="result_sentences">
         {sentences.map((sentence, index) => (
           <div className="results_sentence">

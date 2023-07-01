@@ -10,28 +10,31 @@ function App() {
   console.log(tushetians);
   return (
     <div className="applc">
-      {tushetians.map((chapter, index) => {
-        const randomSentences = [];
-        for (let i = 0; i < 4; i++) {
-          const randomNumber = Math.floor(
-            Math.random() * chapter.sentences.length
+      <div className="main_header"> ზოგადი აღწერა </div>
+      <div className="chapters">
+        {tushetians.map((chapter, index) => {
+          const randomSentences = [];
+          for (let i = 0; i < 4; i++) {
+            const randomNumber = Math.floor(
+              Math.random() * chapter.sentences.length
+            );
+            randomSentences.push(chapter.sentences[randomNumber]);
+            // console.log(chapter.sentences.length);
+            chapter.sentences.splice(randomNumber, 1);
+            // console.log(chapter.sentences.length);
+            // console.log(chapter.sentences[randomNumber]);
+          }
+          // console.log(index,"chapter", chapter.topic,randomSentences)
+          return (
+            <Chapter
+              key={index}
+              index={index}
+              topic={chapter.topic}
+              value={randomSentences}
+            />
           );
-          randomSentences.push(chapter.sentences[randomNumber]);
-          // console.log(chapter.sentences.length);
-          chapter.sentences.splice(randomNumber, 1);
-          // console.log(chapter.sentences.length);
-          // console.log(chapter.sentences[randomNumber]);
-        }
-        // console.log(index,"chapter", chapter.topic,randomSentences)
-        return (
-          <Chapter
-            key={index}
-            index={index}
-            topic={chapter.topic}
-            value={randomSentences}
-          />
-        );
-      })}
+        })}
+      </div>
     </div>
   );
 }
