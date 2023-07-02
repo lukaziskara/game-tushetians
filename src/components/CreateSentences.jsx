@@ -149,7 +149,7 @@ export default function CreateSentences(props) {
                         }
                       >
                         <div className="">
-                          {wordsForCS[sentenceIndex][localIndex].tWord}
+                          {/* {wordsForCS[sentenceIndex][localIndex].tWord} */}
                         </div>
                         <div
                           className={
