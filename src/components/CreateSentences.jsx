@@ -6,12 +6,13 @@ export default function CreateSentences(props) {
   // const cardsData = props.cardsData;
   const sentences = props.sentences;
   // console.log(props, cardsData);
-  const [clickedSentence, setClickedSentence] = useState(0);
+  // const [sentenceToFill, setClickedSentence] = useState(0);
   const [clickedWordPlace, setClickedWordPlace] = useState("s0w0");
   const [clickedWord, setClickedWord] = useState(false);
   const [wordReturned, setWordReturned] = useState(false);
   const [clickedWordToReturnId, setClickedWordToReturnId] = useState();
   const [changed, setChanged] = useState(0);
+  const [sentenceToFill, setSentenceToFill] = useState(0);
 
   const chosenPlaceHolder = useRef();
   const wordToReturn = useRef();
@@ -27,6 +28,12 @@ export default function CreateSentences(props) {
   ]);
   const sentenceToGo = useRef(4);
 
+  const words = sentences[sentenceToFill].words.split("@");
+  // const tWords = sentence.tWords.split("@").map((tWord, index) => ({
+  //   tWord,
+  //   isBack: false,
+  //   sentenceIndex,
+  // }));
   const wordsForCS = useMemo(() => {
     console.log("useMemo", sentences);
     return sentences.map((sentence, index) => {
@@ -41,16 +48,16 @@ export default function CreateSentences(props) {
   }, []);
   console.log(
     clickedWordPlace,
-    wordsForCS[clickedSentence],
-    chosenPlaceHolderId.current[clickedSentence]
+    wordsForCS[sentenceToFill],
+    chosenPlaceHolderId.current[sentenceToFill]
   );
 
   console.log(
     wordsForCards,
-    clickedSentence,
+    sentenceToFill,
     chosenPlaceHolderId.current,
     chosenPlaceHolder.current,
-    wordsForCS[clickedSentence]
+    wordsForCS
   );
   const shuffledDataForCS = useMemo(() => {
     return wordsForCards
@@ -69,30 +76,71 @@ export default function CreateSentences(props) {
   // }
   useEffect(() => {
     if (
-      chosenPlaceHolderId.current[clickedSentence] <
-      wordsForCS[clickedSentence].length
+      chosenPlaceHolderId.current[sentenceToFill] <
+      wordsForCS[sentenceToFill].length
     ) {
       console.log(
-        wordsForCS[clickedSentence][
-          chosenPlaceHolderId.current[clickedSentence]
-        ].word
+        wordsForCS[sentenceToFill][chosenPlaceHolderId.current[sentenceToFill]]
+          .word
       );
       chosenPlaceHolder.current =
-        wordsForCS[clickedSentence][
-          chosenPlaceHolderId.current[clickedSentence]
+        wordsForCS[sentenceToFill][
+          chosenPlaceHolderId.current[sentenceToFill]
         ].word;
     }
-  }, [clickedSentence]);
+  }, [sentenceToFill]);
   return (
     <div className="words_and_sentences">
       <div className="sentences">
-        {sentences.map((sentence, sentenceIndex) => {
-          const words = sentence.words.split("@");
-          // const tWords = sentence.tWords.split("@").map((tWord, index) => ({
-          //   tWord,
-          //   isBack: false,
-          //   sentenceIndex,
-          // }));
+        <div className="">
+          <div className="to_translate">
+            {sentences[sentenceToFill].translation}
+          </div>
+          <div className="build_here">
+            {words.map((word, index) => (
+              <div
+                className={
+                  wordsForCS[sentenceToFill][index].isBack
+                    ? "word_returned"
+                    : // : clickedSentence === sentenceIndex &&
+                      //   chosenPlaceHolderId.current[clickedSentence] ===
+                      //     localIndex
+                      // ? "word_for_sentence clicked_word_for_sentence"
+                      "word_for_sentence"
+                }
+              >
+                {word}
+              </div>
+            ))}
+          </div>
+          <button
+            onClick={() => {
+              console.log(
+                "fill",
+                sentenceToFill,
+                wordsForCS.length,
+                chosenPlaceHolderId.current[sentenceToFill]
+              );
+              if (
+                sentenceToFill < wordsForCS.length - 1 &&
+                words.length == chosenPlaceHolderId.current[sentenceToFill]
+              ) {
+                console.log("მოიმატა");
+                setSentenceToFill(sentenceToFill + 1);
+              } else if (
+                sentenceToFill === wordsForCS.length - 1 &&
+                wordsForCS.length == chosenPlaceHolderId.current[sentenceToFill]
+              ) {
+                setPartOfGame(3);
+              }
+            }}
+          >
+            {sentenceToFill < wordsForCS.length - 1
+              ? "შემდეგი"
+              : "შემდეგი ეტაპი  "}
+          </button>
+        </div>
+        {/* {sentences.map((sentence, sentenceIndex) => {
           const globalIndex = sentenceIndex;
           console.log(
             sentence,
@@ -149,7 +197,7 @@ export default function CreateSentences(props) {
                         }
                       >
                         <div className="">
-                          {/* {wordsForCS[sentenceIndex][localIndex].tWord} */}
+                          {wordsForCS[sentenceIndex][localIndex].tWord}
                         </div>
                         <div
                           className={
@@ -160,7 +208,6 @@ export default function CreateSentences(props) {
                         >
                           {word}
                         </div>
-                        {/* <div className="">{word.backText}</div> */}
                       </div>
                     );
                   })}
@@ -212,7 +259,7 @@ export default function CreateSentences(props) {
               </div>
             </div>
           );
-        })}
+        })} */}
       </div>
       <div className="words_for_sentence">
         {shuffledDataForCS.map((word, index) => (
@@ -229,7 +276,7 @@ export default function CreateSentences(props) {
               wordToReturnId.current = index;
               console.log(
                 "daeklikaaa",
-                clickedSentence,
+                sentenceToFill,
                 wordToReturn.current,
                 chosenPlaceHolder.current
                 // wordsForCS[clickedSentence][
@@ -237,33 +284,33 @@ export default function CreateSentences(props) {
                 // ].word
               );
               if (
-                chosenPlaceHolderId.current[clickedSentence] <
-                wordsForCS[clickedSentence].length
+                chosenPlaceHolderId.current[sentenceToFill] <
+                wordsForCS[sentenceToFill].length
               ) {
                 chosenPlaceHolder.current =
-                  wordsForCS[clickedSentence][
-                    chosenPlaceHolderId.current[clickedSentence]
+                  wordsForCS[sentenceToFill][
+                    chosenPlaceHolderId.current[sentenceToFill]
                   ].word;
                 if (wordToReturn.current === chosenPlaceHolder.current) {
                   isCorrect.current *= 1;
-                  wordsForCS[clickedSentence][
-                    chosenPlaceHolderId.current[clickedSentence]
+                  wordsForCS[sentenceToFill][
+                    chosenPlaceHolderId.current[sentenceToFill]
                   ].isBack = true;
                   console.log(
                     "დაემთხვა",
                     isCorrect.current,
-                    wordsForCS[clickedSentence][
-                      chosenPlaceHolderId.current[clickedSentence]
+                    wordsForCS[sentenceToFill][
+                      chosenPlaceHolderId.current[sentenceToFill]
                     ].isBack
                   );
                   console.log(
                     chosenPlaceHolder.current,
-                    wordsForCS[clickedSentence].length,
-                    chosenPlaceHolderId.current[clickedSentence],
+                    wordsForCS[sentenceToFill].length,
+                    chosenPlaceHolderId.current[sentenceToFill],
                     "დაემატა",
                     [1, 2] === [1, 2]
                   );
-                  chosenPlaceHolderId.current[clickedSentence]++;
+                  chosenPlaceHolderId.current[sentenceToFill]++;
                   // chosenPlaceHolderId.current[clickedSentence] + 1;
                   shuffledDataForCS.splice(index, 1);
                   setPoint(point + 1);
@@ -275,7 +322,7 @@ export default function CreateSentences(props) {
                 }
               } else {
                 chosenPlaceHolder.current = null;
-                console.log(clickedSentence);
+                console.log(sentenceToFill);
               }
               // console.log(clickedSentence);
               // console.log(wordToReturn.current, "დაემთხვა");

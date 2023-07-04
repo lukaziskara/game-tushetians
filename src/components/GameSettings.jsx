@@ -88,7 +88,7 @@ export default function Settings(props) {
               setSentencesThirdState(gameDifficulty.isThirdVisible);
             }}
           >
-            {index + 1}
+            {/* {index + 1} */}
           </div>
         ))}
       </div>

@@ -262,6 +262,7 @@ button {
 
 } */
 .to_translate {
+  color: white;
   padding: 0.3em;
 }
 .full_sentence_button {
@@ -323,6 +324,7 @@ button {
 }
 .word_for_sentence {
   background-color: #547753;
+  color: #547753;
   padding: 0.3em;
   margin: 0.3em;
   border-radius: 0.3em;
