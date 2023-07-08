@@ -109,7 +109,7 @@ export default function CreateSentences(props) {
                       "word_for_sentence"
                 }
               >
-                {word}
+                {wordsForCS[sentenceToFill][index].isBack ? word : "დოშ"}
               </div>
             ))}
           </div>

@@ -171,8 +171,7 @@ export default function Dictionary(props) {
         <div className="won_words">
           {wonWords.current.map((wonWord, index) => (
             <div className="won_word">
-              <div>{wonWord.frontText}</div>
-              <div>{wonWord.backText}</div>
+              <div>{wonWord.frontText}</div> - <div>{wonWord.backText}</div>
               {/* <div className="expl">განმარტება</div> */}
             </div>
           ))}

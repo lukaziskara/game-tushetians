@@ -75,9 +75,8 @@ button {
 }
 
 /* ////////////////////////////////მახასიათებლები//////////////////////////////////// */
-.difficulty {
-  display: flex;
-  /* flex-wrap: wrap; */
+.select_difficulty {
+  padding: 0.3em;
 }
 .examples {
   background-color: rgb(9, 9, 171);
@@ -94,6 +93,7 @@ button {
 }
 .cItem {
   background-color: #82874d;
+  box-shadow: 0.2em 0.2em;
 }
 .middle_visible {
   background-color: #91764a;
@@ -137,6 +137,7 @@ button {
   cursor: pointer;
   transition: all 0.3 ease-in-out;
   height: fit-content;
+  box-shadow: 0.1em 0.1em;
 }
 .right_card {
   background-color: rgb(4, 127, 4);
@@ -170,15 +171,18 @@ button {
   /* display: flex; */
 }
 .won_words {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
   background-color: #5c605a;
+  padding: 0.3em;
+  box-sizing: border-box;
 }
 .won_word {
-  width: 3em;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
   min-width: fit-content;
-  margin: 0.3em;
+  padding: 0.3em;
+  margin: 0.3em 0;
   background-color: rgb(4, 127, 4);
 }
 .expl {
@@ -293,6 +297,7 @@ button {
   cursor: pointer;
   transition: all 0.3 ease-in-out;
   height: fit-content;
+  box-shadow: 0.1em 0.1em;
 }
 .clicked_card_to_choose {
   background-color: #030303;
@@ -317,6 +322,7 @@ button {
 }
 .word_returned {
   /* background-color: #547753; */
+  color: #547753;
   padding: 0.3em;
   margin: 0.3em;
   border-radius: 0.3em;
@@ -328,6 +334,7 @@ button {
   padding: 0.3em;
   margin: 0.3em;
   border-radius: 0.3em;
+  height: 1em;
   cursor: pointer;
 }
 .clicked_word_for_sentence {
