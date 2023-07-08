@@ -108,6 +108,7 @@ export default function Settings(props) {
         </div>
       </div>
       <button
+        className="start_button"
         onClick={() => {
           setPoint(0);
           setTries(0);
