@@ -70,6 +70,7 @@ export default function Settings(props) {
 
   return (
     <>
+      <h3>აირჩიე სირთულე</h3>
       <div className="flex_center select_difficulty">
         {gameDifficulties.map((gameDifficulty, index) => (
           // console.log(gameDifficulty);
@@ -88,7 +89,7 @@ export default function Settings(props) {
               setSentencesThirdState(gameDifficulty.isThirdVisible);
             }}
           >
-            {chosenDifficulty === index + 1 ? "Y" : "-"}
+            {index < 4 ? "მარტივი" : "რთული"}
             {/* {index + 1} */}
           </div>
         ))}
