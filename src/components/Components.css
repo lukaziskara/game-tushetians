@@ -10,7 +10,7 @@ p {
 .chapter {
   margin: 1em 0.1em;
   padding: 0.7em 0.3em;
-  background-color: rgba(52, 70, 136, 0.839);
+  background-color: rgba(14, 40, 133, 0.839);
   border-radius: 10px;
   width: auto;
 }
@@ -61,9 +61,8 @@ button {
   border: 2px solid green;
   margin: 0.5em;
 }
-.about_header,
 .about_close {
-  cursor: pointer;
+  font-family: "ALK Sanet", sans-serif;
 }
 .about_close,
 .about_header {
@@ -72,6 +71,7 @@ button {
   margin: 0.3em auto 0.3em auto;
   border-radius: 0.3em;
   padding: 0.3em;
+  cursor: pointer;
 }
 
 /* ////////////////////////////////მახასიათებლები//////////////////////////////////// */
@@ -87,9 +87,10 @@ button {
   height: 4em;
 }
 .dItem {
+  font-family: "ALK Sanet", sans-serif;
   background-color: #b8b8b8;
   margin: 0.3em;
-  padding: 0.1em;
+  padding: 0.3em;
   border-radius: 0.3em;
   cursor: pointer;
   max-width: 20%;
@@ -98,7 +99,10 @@ button {
 }
 .cItem {
   background-color: #82874d;
-  box-shadow: 0.2em 0.2em;
+  box-shadow: 0 0.2em;
+  /* box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px,
+    rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px,
+    rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px; */
 }
 .middle_visible {
   background-color: #91764a;
@@ -149,7 +153,11 @@ button {
   cursor: pointer;
   transition: all 0.3 ease-in-out;
   height: fit-content;
-  box-shadow: 0.1em 0.1em;
+  font-family: "Arial GEO Bold", sans-serif;
+  box-shadow: 0 0.1em;
+  /* box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px,
+    rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px,
+    rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px; */
 }
 .right_card {
   background-color: rgb(4, 127, 4);
@@ -224,13 +232,15 @@ button {
   display: flex;
   flex-wrap: wrap;
   height: fit-content;
+  background-color: rgb(79, 121, 60);
   padding: 1em;
 }
 .word_wout_mark {
-  background-color: green;
+  background-color: rgb(144, 180, 144);
   padding: 0.7em;
   margin: 0.3em;
   border-radius: 0.3em;
+  box-shadow: 0 0.1em;
   cursor: pointer;
 }
 .clicked_word {
@@ -250,7 +260,7 @@ button {
   cursor: pointer;
 }
 .mark_among_words {
-  background-color: blue;
+  background-color: rgb(63, 63, 255);
   padding: 0 0.5em 0.5em 0.5em;
   border-radius: 0.3em;
   margin: auto 0;
@@ -292,6 +302,7 @@ button {
 }
 .clicked_card_to_choose {
   background-color: #69706c;
+  font-family: "BPG Glaho", sans-serif;
   border-radius: 0.3em;
   width: fit-content;
   padding: 0.3em;
@@ -302,6 +313,7 @@ button {
 }
 .card_to_choose {
   background-color: #69706c;
+  font-family: "BPG Glaho", sans-serif;
   border-radius: 0.3em;
   width: fit-content;
   padding: 0.3em;
@@ -309,7 +321,10 @@ button {
   cursor: pointer;
   transition: all 0.3 ease-in-out;
   height: fit-content;
-  box-shadow: 0.1em 0.1em;
+  box-shadow: 0 0.1em;
+  /* box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px,
+    rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px,
+    rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px; */
 }
 .clicked_card_to_choose {
   background-color: #030303;
@@ -387,7 +402,7 @@ button {
 }
 .results_native {
   background-color: rgb(0, 78, 72);
-  color: white;
+  color: rgb(179, 178, 178);
   margin: 0.3em;
   padding: 0.3em;
   border-radius: 0.3em;

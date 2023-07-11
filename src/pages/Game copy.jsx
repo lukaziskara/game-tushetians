@@ -1,16 +1,12 @@
-// import { useState } from 'react';
-import "./App.css";
-import Chapter from "./components/Chapter";
-import tushetians from "./tushetians.json";
+import { useState, useMemo } from "react";
+import Chapter from "../components/Chapter";
+import tushetians from "../tushetians.json";
 
-// import tushetians from "./tushetians.json";
-// console.log(tushetians);
-
-function App() {
+function Game() {
+  const [partOfApp, setPartOfApp] = useState("startingPage");
   console.log(tushetians);
   return (
     <div className="applc">
-      <div className="main_header"> ზოგადი აღწერა </div>
       <div className="chapters">
         {tushetians.map((chapter, index) => {
           const randomSentences = [];
@@ -39,4 +35,4 @@ function App() {
   );
 }
 
-export default App;
+export default Game;
