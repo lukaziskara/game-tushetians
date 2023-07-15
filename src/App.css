@@ -14,9 +14,17 @@ body {
 }
 .container {
   display: flex;
-  height: 80vh;
+  flex-direction: column;
+  height: 100vh;
   justify-content: center;
   align-items: center;
+}
+.page-button {
+  background-color: green;
+  padding: 1em;
+  margin: 1em;
+  display: block;
+  border-radius: 0.3em;
 }
 .applc {
   background-color: rgb(95, 96, 95);

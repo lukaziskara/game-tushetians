@@ -89,7 +89,7 @@ button {
 .dItem {
   font-family: "ALK Sanet", sans-serif;
   background-color: #b8b8b8;
-  margin: 0.3em;
+  margin: 0.3em 0.2em;
   padding: 0.3em;
   border-radius: 0.3em;
   cursor: pointer;

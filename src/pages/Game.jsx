@@ -5,6 +5,9 @@ import tushetians from "../tushetians.json";
 function Game() {
   const [partOfApp, setPartOfApp] = useState("startingPage");
   console.log(tushetians);
+  // const allSentences = useMemo(() =>{
+
+  // })
   return (
     <div className="applc">
       <div className="chapters">

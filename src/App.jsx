@@ -11,7 +11,7 @@ function App() {
   const [partOfApp, setPartOfApp] = useState("startingPage");
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
