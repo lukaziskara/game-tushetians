@@ -225,7 +225,7 @@ export default function Chapter(props) {
           >
             III
           </button>
-          <button
+          {/* <button
             className={partOfGame === 4 ? "opened_game" : "closed_game"}
             onClick={() => {
               setPartOfGame(4);
@@ -234,8 +234,9 @@ export default function Chapter(props) {
             }}
           >
             IV
-          </button>
+          </button> */}
           <button
+            className={partOfGame === 4 ? "opened_game" : "closed_game"}
             onClick={() => {
               setPartOfGame(0);
               // console.log("test");

@@ -1,3 +1,7 @@
 export default function Header() {
-  return <header>dwa</header>;
+  return (
+    <footer>
+      <a href="/">მთავარი გვერდი</a>
+    </footer>
+  );
 }

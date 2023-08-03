@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Home from "./pages/Home";
 import AboutIdea from "./pages/AboutIdea";
 import Game from "./pages/Game";
+import Footer from "./components/Footer";
 
 function App() {
   const [partOfApp, setPartOfApp] = useState("startingPage");
@@ -20,6 +21,7 @@ function App() {
           <Route path="/about-game" element={<AboutIdea />} />
         </Routes>
       </BrowserRouter>
+      {/* <Footer /> */}
     </>
   );
 }

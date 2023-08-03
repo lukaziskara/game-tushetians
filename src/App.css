@@ -21,10 +21,12 @@ body {
 }
 .page-button {
   background-color: green;
+  color: black;
   padding: 1em;
   margin: 1em;
   display: block;
   border-radius: 0.3em;
+  text-decoration: none;
 }
 .applc {
   background-color: rgb(95, 96, 95);
