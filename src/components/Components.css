@@ -1,5 +1,13 @@
-p {
+h1,h2{
   text-align: center;
+}
+img{
+  width: 100%;
+  /* min-width: 370px; */
+  border: #000000 solid;
+  box-sizing: border-box;
+}
+p {
   margin: auto;
 }
 .flex_center {
@@ -60,6 +68,7 @@ button {
 .about {
   border: 2px solid green;
   margin: 0.5em;
+  padding: .5em;
 }
 .about_close {
   font-family: "ALK Sanet", sans-serif;

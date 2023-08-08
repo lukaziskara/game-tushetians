@@ -16,11 +16,11 @@ export default function Home() {
           თამაში
         </Link>
       </div>
-      {/* <div className="">
+      <div className="">
         <Link className="page-button" to="/about-game">
           თამაშის შესახებ
         </Link>
-      </div> */}
+      </div>
       {/* <Footer /> */}
     </div>
   );
