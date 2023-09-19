@@ -30,6 +30,7 @@ export default function Chapter(props) {
   });
 
   const sentences = props.value;
+  console.log(props.value);
   console.log(sentences.filter(sentence=>sentence.picture));
   console.log(sentences.filter(sentence=>sentence.picture||sentence.words));
   // შემთხვევითად ამოირჩევა წინადადებები ყოველი თავიდან და დაიშლება ობიექტებად, რომლებიც wordsForCards მასივში მიმდევრობით ჩალაგდება
@@ -341,10 +342,11 @@ export default function Chapter(props) {
                 desc={about.partsOfGame[partOfGame]}
               />
               <GuessPicture
-              // point={point}
-              // setPoint={setPoint}
-              // tries={tries}
-              // setTries={setTries}
+              point={point}
+              setPoint={setPoint}
+              tries={tries}
+              setTries={setTries}
+              sentences={sentences}
               // cardsData={wordsForCards}
               // marksAmount={marksAmount.current}
               />
