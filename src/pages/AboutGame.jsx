@@ -1,4 +1,4 @@
-export default function Home() {
+export default function AboutGame() {
   return (
     <div className="about">
       <h1>თამაშის შესახებ</h1>

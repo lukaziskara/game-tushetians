@@ -12,25 +12,12 @@ import about from "../about.json";
 import GuessPicture from "../components/GuessPicture";
 import TellPicture from "../components/TellPicture";
 
-// import { useState, useMemo } from "react";
-// import Chapter from "../components/Chapter";
-// import tushetians from "../tushetians.json";
 import tushetians from "../joined.json";
 import lexicon from "../lexicon.json";
 
-const randomSentences = [];
-for (let i = 0; i < 4; i++) {
-  const randomNumber = Math.floor(Math.random() * tushetians.length);
-  randomSentences.push(tushetians[randomNumber]);
-  tushetians.splice(randomNumber, 1);
-}
 function Game() {
-  // const [partOfApp, setPartOfApp] = useState("startingPage");
-  // console.log(tushetians);
-
   const [point, setPoint] = useState(0);
   const [tries, setTries] = useState(0);
-  // console.log(about);
   const [openedGame, setOpenedGame] = useState(false);
   const [partOfGame, setPartOfGame] = useState(0);
   const [newGame, setNewGame] = useState(0);
@@ -42,48 +29,86 @@ function Game() {
     secondPartState: "second_visible",
     thirdPartState: "third_visible",
   });
-
-  const sentences = randomSentences;
-  console.log(sentences.filter((sentence) => sentence.picture));
-  console.log(
-    sentences.filter((sentence) => sentence.picture || sentence.words)
-  );
+  const randomSentences = useMemo(() => {
+    const randomSentences = [];
+    for (let i = 0; i < 4; i++) {
+      const randomNumber = Math.floor(Math.random() * tushetians.length);
+      randomSentences.push(tushetians[randomNumber]);
+      tushetians.splice(randomNumber, 1);
+      // console.log(randomSentences, randomNumber);
+    }
+    return randomSentences;
+  }, [newGame]);
   // შემთხვევითად ამოირჩევა წინადადებები ყოველი თავიდან და დაიშლება ობიექტებად, რომლებიც wordsForCards მასივში მიმდევრობით ჩალაგდება
   const iSentence = useRef();
   const marksAmount = useRef(0);
-  // const dictionarySsettings = useRef(
-  //   {
-  //     firstPartState,
-  //     secondPartState,
-  //     thirdPartState,
-  //   },
-  //   [newGame]
-  // );
-  // console.log(dictionarySsettings);
+  //სიტყვები ცალ-ცალკე წინადადებებიდან
+  const wordsFromSentences = useMemo(() => {
+    // const bWords = [];
+    const marks = [",", ".", ":", ";", "!", "?"];
+    return randomSentences.map((sentence) =>
+      sentence.sentence.split(" ").map((bWord) => {
+        const [newWord, mark] = marks.includes(bWord[bWord.length - 1])
+          ? [bWord.substring(0, bWord.length - 1), bWord[bWord.length - 1]]
+          : [bWord, ""];
+        // bWord[bWord.length - 1] = "";
+        return {
+          bWord: newWord,
+          pMark: mark,
+        };
+      })
+    );
+  }, [newGame]);
+  //სიტყვები წინადადებებიდან. გაერთიანებული
+
+  const allWords = useMemo(() => wordsFromSentences.flat(), [newGame]);
+  console.log(allWords);
+  //ლექსიკონიდან
+  const wordsFromLexicon = useMemo(() => {
+    return allWords.map((fromSentences) => {
+      // console.log(fromSentences);
+      let variations = "";
+      const fromLexicon = lexicon.find((reqWord) => {
+        // console.log("reqWord", reqWord);
+        if (reqWord.theWord === fromSentences.bWord) {
+          variations += reqWord.wTranslation + ",";
+          console.log(reqWord, fromSentences.pMark);
+
+          return reqWord;
+        }
+      });
+      // return reqWord.translation;
+      // });
+      console.log(fromLexicon);
+      return { ...fromLexicon, pMark: fromSentences.pMark };
+      // allWords.map((fullWord, index) => ({
+      //   word: fromLexicon[index],
+      //   tword: fullWord,
+      // }));
+    });
+  }, [newGame]);
+  console.log(
+    wordsFromSentences,
+    allWords,
+    "wordsFromLexicon",
+    wordsFromLexicon
+  );
+  const marksFromSentence = useMemo(() =>
+    wordsFromSentences.map((word) => {
+      // console.log(word);
+    })
+  );
+
+  // ძველი ნაწილი
   const wordsForCards = useMemo(() => {
     const words = [];
     const tWords = [];
     //
-    for (let i = 0; i < sentences.length; i++) {
+    for (let i = 0; i < randomSentences.length; i++) {
       iSentence.current = i;
-      console.log("sentence", iSentence);
-      const sentence = sentences[i].sentence;
-      const translatedWords = sentences[i].tWords;
-      // const test = sentence.split(" ").map((word, index) => {
-      //   return {
-      //     word,
-      //     isBack: false,
-      //     sentenceIndex: i,
-      //   };
-      // });
-      // words.push(
-      //   ...sentence.split(" ").map((word, index) => {
-      //     return {
-      //       word,
-      //       isBack: false,
-      //     };
-      //   })
-      // );
+      // console.log("sentence", iSentence);
+      const sentence = randomSentences[i].sentence;
+      const translatedWords = randomSentences[i].tWords;
       words.push(...sentence.split(" "));
       tWords.push(
         ...translatedWords.split("@").map((tWord, index) => ({
@@ -93,7 +118,7 @@ function Game() {
         }))
       );
     }
-    console.log(tWords);
+    // console.log(tWords);
     marksAmount.current = 0;
     return words.map((value, index) => {
       let newWord;
@@ -113,7 +138,7 @@ function Game() {
         //   // newWord = words[index].substring(0, words[index].length - 1);
         // }
         // words[index] = "dawfsef"
-        console.log(marksAmount.current);
+        // console.log(marksAmount.current);
       } else {
         newWord = words[index];
         // if (tWords[index]) {
@@ -178,19 +203,11 @@ function Game() {
   //       };
   //     })
   //     .sort(() => 0.5 - Math.random());
-  // }, []);
+  // // }, []);
   console.log(wordsForCards, marksAmount.current);
   return (
     <div className="chapter">
       <div className="topic-div">
-        {/* <button
-          onClick={() => {
-            openedGame === false ? setOpenedGame(true) : setOpenedGame(false);
-          }}
-        >
-          ჩამოშლა
-        </button> */}
-        {/* <h2 className="topic_header">{props.topic}</h2> */}
         <div className="result">
           <div className="point">
             {point}
@@ -301,7 +318,7 @@ function Game() {
                 desc={about.partsOfGame[partOfGame]}
               />
               <Dictionary
-                newGame={newGame}
+                // newGame={newGame}
                 point={point}
                 setPoint={setPoint}
                 tries={tries}
@@ -309,11 +326,12 @@ function Game() {
                 firstPartState={dictionarySettings.firstPartState}
                 secondPartState={dictionarySettings.secondPartState}
                 thirdPartState={dictionarySettings.thirdPartState}
-                cardsData={wordsForCards}
+                cardsData={wordsFromLexicon}
+                // cardsData={wordsForCards}
                 setPartOfGame={setPartOfGame}
                 isVisibleFront={isVisibleFront}
                 isVisibleBack={isVisibleBack}
-                sentences={sentences}
+                sentences={randomSentences}
               />
             </div>
           ) : partOfGame === 2 ? (
@@ -331,7 +349,7 @@ function Game() {
                 // wordsForCS={wordsForCS}
                 wordsForCards={wordsForCards}
                 isBackVisible={isBackVisible}
-                sentences={sentences}
+                sentences={randomSentences}
                 setPartOfGame={setPartOfGame}
               />
             </div>
@@ -385,7 +403,7 @@ function Game() {
                 // setPoint={setPoint}
                 tries={tries}
                 // setTries={setTries}
-                sentences={sentences}
+                sentences={randomSentences}
                 // marksAmount={marksAmount.current}
               />
             </div>
