@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 export default function CreateSentences(props) {
+  console.log(props);
   const { point, setPoint, tries, setTries, wordsForCards, setPartOfGame } =
     props;
   // const cardsData = props.cardsData;

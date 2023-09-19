@@ -69,7 +69,7 @@ export default function Settings(props) {
   // useEffect(() => {}, [setChosenDifficulty]);
 
   return (
-    <>
+    <div className="settings">
       <h3>აირჩიე სირთულე</h3>
       <div className="flex_center select_difficulty">
         {gameDifficulties.map((gameDifficulty, index) => (
@@ -123,6 +123,6 @@ export default function Settings(props) {
       >
         დაწყება
       </button>
-    </>
+    </div>
   );
 }
