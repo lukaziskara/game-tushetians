@@ -29,9 +29,19 @@ function Game() {
     secondPartState: "second_visible",
     thirdPartState: "third_visible",
   });
+  const sentencesWithPicture = useMemo(() =>
+    tushetians.filter((sentence) => sentence.picture)
+  );
+  console.log(sentencesWithPicture);
   const randomSentences = useMemo(() => {
     const randomSentences = [];
-    for (let i = 0; i < 4; i++) {
+    const randomWithpicture = Math.floor(
+      Math.random() * sentencesWithPicture.length
+    );
+    randomSentences.push(sentencesWithPicture[randomWithpicture]);
+    // tushetians.splice(randomWithpicture, 1);
+
+    for (let i = 0; i < 3; i++) {
       const randomNumber = Math.floor(Math.random() * tushetians.length);
       randomSentences.push(tushetians[randomNumber]);
       tushetians.splice(randomNumber, 1);
@@ -39,6 +49,8 @@ function Game() {
     }
     return randomSentences;
   }, [newGame]);
+  console.log(randomSentences);
+
   // შემთხვევითად ამოირჩევა წინადადებები ყოველი თავიდან და დაიშლება ობიექტებად, რომლებიც wordsForCards მასივში მიმდევრობით ჩალაგდება
   const iSentence = useRef();
   const marksAmount = useRef(0);
@@ -72,14 +84,14 @@ function Game() {
         // console.log("reqWord", reqWord);
         if (reqWord.theWord === fromSentences.bWord) {
           variations += reqWord.wTranslation + ",";
-          console.log(reqWord, fromSentences.pMark);
+          // console.log(reqWord, fromSentences.pMark);
 
           return reqWord;
         }
       });
       // return reqWord.translation;
       // });
-      console.log(fromLexicon);
+      // console.log(fromLexicon);
       return { ...fromLexicon, pMark: fromSentences.pMark };
       // allWords.map((fullWord, index) => ({
       //   word: fromLexicon[index],
@@ -376,12 +388,14 @@ function Game() {
                 desc={about.partsOfGame[partOfGame]}
               />
               <GuessPicture
-              // point={point}
-              // setPoint={setPoint}
-              // tries={tries}
-              // setTries={setTries}
-              // cardsData={wordsForCards}
-              // marksAmount={marksAmount.current}
+                sentences={randomSentences}
+                point={point}
+                setPoint={setPoint}
+                tries={tries}
+                setTries={setTries}
+                // cardsData={wordsForCards}
+                // marksAmount={marksAmount.current}
+                setPartOfGame={setPartOfGame}
               />
             </div>
           ) : partOfGame === 5 ? (
@@ -390,7 +404,15 @@ function Game() {
                 partOfGame={partOfGame}
                 desc={about.partsOfGame[partOfGame]}
               />
-              <TellPicture />
+              <TellPicture
+                sentences={randomSentences}
+                point={point}
+                setPoint={setPoint}
+                tries={tries}
+                setTries={setTries}
+                cardsData={wordsForCards}
+                setPartOfGame={setPartOfGame}
+              />
             </div>
           ) : partOfGame === 6 ? (
             <div className="">

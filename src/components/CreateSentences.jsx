@@ -308,8 +308,8 @@ export default function CreateSentences(props) {
                     chosenPlaceHolder.current,
                     wordsForCS[sentenceToFill].length,
                     chosenPlaceHolderId.current[sentenceToFill],
-                    "დაემატა",
-                    [1, 2] === [1, 2]
+                    "დაემატა"
+                    // {[1, 2] == [1, 2]}
                   );
                   chosenPlaceHolderId.current[sentenceToFill]++;
                   // chosenPlaceHolderId.current[clickedSentence] + 1;
