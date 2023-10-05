@@ -55,7 +55,7 @@ export default function Dictionary(props) {
       })
       .sort(() => 0.5 - Math.random());
   }, []);
-  console.log(shuffledDataForLeft, shuffledDataForRight);
+  console.log(shuffledDataForLeft, shuffledDataForRight, "sentences", props.sentences);
   // console.log(wonWords)
   return (
     <>

@@ -10,15 +10,21 @@ export default function GuessPicture(props) {
     return sentences.filter((sentence) => sentence.picture);
   }, []);
   const shuffledSentences = useMemo(() => {
-    return sentences.sort(() => 0.5 - Math.random());
+    // const tempSentences = sentences;
+    return sentences.map((sentence)=>sentence).sort(() => 0.5 - Math.random());
   }, []);
   // const pictureData = sentences[0].picture.split("/");
   // const imagePath = "game_photos/გაერთიანებული/";
   // const image = `${imagePath}1 (1).jpg`;
   // const image = `${imagePath}${pictureData[1]}  (${pictureData[2]}).jpg`;
   console.log(
+    "wordsWithPictures", 
+    withPictures,
+    withPictures[currentIndex].pathOfPicture,
     "shuffledSentences",
-    shuffledSentences
+    shuffledSentences,
+    "sentences",
+    sentences
     // image,
     // pictureData[1],
     // withPictures,
@@ -29,8 +35,9 @@ export default function GuessPicture(props) {
       {withPictures.length != 0 ? (
         <div className="">
           <div className="">
-            <div className="">
+            <div className="flex_center">
               <img
+                // max-width="375"
                 src={withPictures[currentIndex].pathOfPicture}
                 alt=""
                 // width="100px"

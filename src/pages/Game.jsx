@@ -405,13 +405,23 @@ function Game() {
                 desc={about.partsOfGame[partOfGame]}
               />
               <TellPicture
-                sentences={randomSentences}
                 point={point}
                 setPoint={setPoint}
                 tries={tries}
                 setTries={setTries}
-                cardsData={wordsForCards}
+                // shuffledDataForCS={shuffledDataForCS}
+                // wordsForCS={wordsForCS}
+                wordsForCards={wordsForCards}
+                isBackVisible={isBackVisible}
+                sentences={randomSentences}
                 setPartOfGame={setPartOfGame}
+                // sentences={randomSentences}
+                // point={point}
+                // setPoint={setPoint}
+                // tries={tries}
+                // setTries={setTries}
+                // cardsData={wordsForCards}
+                // setPartOfGame={setPartOfGame}
               />
             </div>
           ) : partOfGame === 6 ? (
