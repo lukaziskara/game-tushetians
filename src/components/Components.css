@@ -1,16 +1,7 @@
-<<<<<<< HEAD
 h1,h2{
   text-align: center;
 }
 img{
-=======
-h1,
-h2 {
-  text-align: center;
-}
-img {
-  max-width: 700px;
->>>>>>> production
   width: 100%;
   /* min-width: 370px; */
   border: #000000 solid;
@@ -77,11 +68,7 @@ button {
 .about {
   border: 2px solid blue;
   margin: 0.5em;
-<<<<<<< HEAD
   padding: .5em;
-=======
-  padding: 0.5em;
->>>>>>> production
 }
 .about_close {
   font-family: "ALK Sanet", sans-serif;
