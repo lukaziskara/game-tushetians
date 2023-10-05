@@ -3,6 +3,7 @@ h1,h2{
 }
 img{
   width: 100%;
+  max-width: 700px;
   /* min-width: 370px; */
   border: #000000 solid;
   box-sizing: border-box;

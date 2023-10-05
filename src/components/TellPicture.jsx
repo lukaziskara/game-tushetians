@@ -40,7 +40,7 @@ export default function CreateSentences(props) {
 
   const wordsForCS = useMemo(() => {
     console.log("useMemo", sentences);
-    return sentences.map((sentence, index) => {
+    return withPictures.map((sentence, index) => {
       const words = sentence.words.split("@");
       return sentence.tWords.split("@").map((tWord, index) => ({
         word: words[index],
@@ -68,7 +68,8 @@ export default function CreateSentences(props) {
   console.log(
     "withPicture length",
     withPictures.length,
-    withPictures
+    withPictures,
+    wordsForCS
   );
   useEffect(() => {
     if (
