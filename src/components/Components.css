@@ -1,7 +1,16 @@
+<<<<<<< HEAD
 h1,h2{
   text-align: center;
 }
 img{
+=======
+h1,
+h2 {
+  text-align: center;
+}
+img {
+  max-width: 700px;
+>>>>>>> production
   width: 100%;
   /* min-width: 370px; */
   border: #000000 solid;
@@ -16,7 +25,7 @@ p {
   align-items: center;
 }
 .chapter {
-  margin: 1em 0.1em;
+  /* margin: 1em 0.1em; */
   padding: 0.7em 0.3em;
   background-color: rgba(14, 40, 133, 0.839);
   border-radius: 10px;
@@ -66,9 +75,13 @@ button {
 /* **************************************თამაშის შესახებ******************************************* */
 
 .about {
-  border: 2px solid green;
+  border: 2px solid blue;
   margin: 0.5em;
+<<<<<<< HEAD
   padding: .5em;
+=======
+  padding: 0.5em;
+>>>>>>> production
 }
 .about_close {
   font-family: "ALK Sanet", sans-serif;
@@ -82,8 +95,19 @@ button {
   padding: 0.3em;
   cursor: pointer;
 }
+.about_part{
+  border-radius: .3em;
+  border: 2px solid green;
+  margin: .1em;
+}
 
 /* ////////////////////////////////მახასიათებლები//////////////////////////////////// */
+.settings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
 .select_difficulty {
   padding: 0.3em;
   flex-wrap: wrap;
@@ -92,10 +116,13 @@ button {
   background-color: rgb(9, 9, 171);
   display: flex;
   justify-content: space-around;
+  box-sizing: border-box;
   align-items: center;
   height: 4em;
+  width: 100%;
 }
 .dItem {
+  text-align: center;
   font-family: "ALK Sanet", sans-serif;
   background-color: #b8b8b8;
   margin: 0.3em 0.2em;
@@ -397,7 +424,19 @@ button {
   cursor: pointer;
 }
 
-/* ********************************შედეგები************************************ */
+/* ********************************სურათის გამოცნობა************************************* */
+.sentence_card {
+  background-color: green;
+  padding: 0.3em;
+  margin: 0.3em;
+  border-radius: 0.3em;
+  cursor: pointer;
+}
+/* **********************************სურათის აღწერა*********************************** */
+.card_board {
+  
+}
+/* *************************************შედეგები************************************ */
 
 .results_sentence {
   background-color: rgba(52, 70, 136, 0.839);

@@ -86,7 +86,7 @@ export default function WordsAndMarks(props) {
       </div>
       {marksAmount.current === 0 ? (
         <div className="next">
-          <button onClick={() => props.setPartOfGame(5)}>შედეგები</button>
+          <button onClick={() => props.setPartOfGame(6)}>შედეგები</button>
           <button onClick={() => props.setPartOfGame(4)}>შემდეგი ეტაპი</button>
         </div>
       ) : (

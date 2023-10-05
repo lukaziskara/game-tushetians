@@ -1,19 +1,22 @@
 import { useMemo, useRef, useState } from "react";
 import "./Components.css";
 import Dictionary from "./Dictionary";
-import WordsAndMarks from "./WordsAndMarks";
 import CreateSentences from "./CreateSentences";
+import WordsAndMarks from "./WordsAndMarks";
 import PartOfSpeech from "./PartsOfSpeech";
+
 import Settings from "./GameSettings";
 import Results from "./Results";
 import About from "./About";
 import about from "../about.json";
+import GuessPicture from "./GuessPicture";
+import TellPicture from "./TellPicture";
 
 //კომპონენტს props-ებად მოეწოდება: value-შემთხვევითად არჩეული წინადადებები,
 export default function Chapter(props) {
   const [point, setPoint] = useState(0);
   const [tries, setTries] = useState(0);
-  console.log(about);
+  // console.log(about);
   const [openedGame, setOpenedGame] = useState(false);
   const [partOfGame, setPartOfGame] = useState(0);
   const [newGame, setNewGame] = useState(0);
@@ -26,12 +29,10 @@ export default function Chapter(props) {
     thirdPartState: "third_visible",
   });
 
-  // const [firstPartState, setFirstPartState] = useState("first_visible");
-  // const [secondPartState, setSecondPartState] = useState("second_visible");
-  // const [thirdPartState, setThirdPartState] = useState("third_visible");
-
   const sentences = props.value;
-  console.log(sentences);
+  console.log(props.value);
+  console.log(sentences.filter(sentence=>sentence.picture));
+  console.log(sentences.filter(sentence=>sentence.picture||sentence.words));
   // შემთხვევითად ამოირჩევა წინადადებები ყოველი თავიდან და დაიშლება ობიექტებად, რომლებიც wordsForCards მასივში მიმდევრობით ჩალაგდება
   const iSentence = useRef();
   const marksAmount = useRef(0);
@@ -225,7 +226,7 @@ export default function Chapter(props) {
           >
             III
           </button>
-          {/* <button
+          <button
             className={partOfGame === 4 ? "opened_game" : "closed_game"}
             onClick={() => {
               setPartOfGame(4);
@@ -234,9 +235,20 @@ export default function Chapter(props) {
             }}
           >
             IV
-          </button> */}
+          </button>
           <button
-            className={partOfGame === 4 ? "opened_game" : "closed_game"}
+            className={partOfGame === 5 ? "opened_game" : "closed_game"}
+            onClick={() => {
+              setPartOfGame(5);
+              // console.log("test");
+              setPoint(0);
+              setTries(0);
+            }}
+          >
+            V
+          </button>
+          <button
+            className={partOfGame === 6 ? "opened_game" : "closed_game"}
             onClick={() => {
               setPartOfGame(0);
               // console.log("test");
@@ -329,16 +341,25 @@ export default function Chapter(props) {
                 partOfGame={partOfGame}
                 desc={about.partsOfGame[partOfGame]}
               />
-              <PartOfSpeech
-              // point={point}
-              // setPoint={setPoint}
-              // tries={tries}
-              // setTries={setTries}
+              <GuessPicture
+              point={point}
+              setPoint={setPoint}
+              tries={tries}
+              setTries={setTries}
+              sentences={sentences}
               // cardsData={wordsForCards}
               // marksAmount={marksAmount.current}
               />
             </div>
           ) : partOfGame === 5 ? (
+            <div className="">
+              <About
+                partOfGame={partOfGame}
+                desc={about.partsOfGame[partOfGame]}
+              />
+              <TellPicture />
+            </div>
+          ) : partOfGame === 6 ? (
             <div className="">
               <About
                 partOfGame={partOfGame}

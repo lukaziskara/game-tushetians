@@ -11,19 +11,20 @@ export default function Dictionary(props) {
     firstPartState,
     secondPartState,
     thirdPartState,
+    cardsData,
   } = props;
-  const wonWords = useRef([], [newGame]);
+  const wonWords = useRef([]);
   //[point,setPoint,tries,setTries,cardsData]
   // console.log("შედეგები",props.point, props.tries,props)
   const leftBack = useRef();
   const rightBack = useRef();
   const frontTextId = useRef();
-  const backTextId = useRef();
-  const sentences = props.sentences;
-  const cardsData = props.cardsData;
-  const startingWords = useRef(cardsData.length);
+  const theWordId = useRef();
+  // const sentences = props.sentences;
+  // const cardsData = props.cardsData;
+  // const startingWords = useRef(cardsData.length);
   // const wonWords = useRef([1,2,3]);
-  console.log("cardsData", typeof cardsData, cardsData, cardsData.length);
+  // console.log("cardsData", typeof cardsData, cardsData, cardsData.length);
   const [clickedRightCardId, setClickedRightCardId] = useState();
   const [clickedLeftCardId, setClickedLeftCardId] = useState();
   const [visibleBackIndex, setVisibleBackIndex] = useState();
@@ -33,11 +34,11 @@ export default function Dictionary(props) {
   const shuffledDataForLeft = useMemo(() => {
     return cardsData
       .map((cardData) => {
-        // console.log(cardData)
+        console.log(cardData);
         return {
-          frontText: cardData.frontText,
-          backText: cardData.backText,
-          id: cardData.id,
+          wTranslation: cardData.wTranslation,
+          theWord: cardData.theWord,
+          id: cardData.index,
         };
       })
       .sort(() => 0.5 - Math.random());
@@ -47,14 +48,14 @@ export default function Dictionary(props) {
     return cardsData
       .map((cardData) => {
         return {
-          frontText: cardData.frontText,
-          backText: cardData.backText,
-          id: cardData.id,
+          wTranslation: cardData.wTranslation,
+          theWord: cardData.theWord,
+          id: cardData.index,
         };
       })
       .sort(() => 0.5 - Math.random());
   }, []);
-  // console.log(shuffledDataForLeft, shuffledDataForRight);
+  console.log(shuffledDataForLeft, shuffledDataForRight, "sentences", props.sentences);
   // console.log(wonWords)
   return (
     <>
@@ -70,9 +71,9 @@ export default function Dictionary(props) {
                 }
                 onClick={() => {
                   // leftBack.current = "dwafesdr"
-                  leftBack.current = cardData.backText;
+                  leftBack.current = cardData.theWord;
                   frontTextId.current = index;
-                  // console.log(backTextId.current, shuffledDataForRight);
+                  console.log(cardData);
                   if (leftBack.current === rightBack.current) {
                     console.log(rightBack.current);
                   }
@@ -81,7 +82,7 @@ export default function Dictionary(props) {
                     props.setTries(props.tries + 1);
                     wonWords.current.push(cardData);
                     shuffledDataForLeft.splice(frontTextId.current, 1);
-                    shuffledDataForRight.splice(backTextId.current, 1);
+                    shuffledDataForRight.splice(theWordId.current, 1);
                     rightBack.current = null;
                     leftBack.current = null;
                     if (isSecond) {
@@ -98,11 +99,11 @@ export default function Dictionary(props) {
                   setClickedLeftCardId(cardData.id);
                 }}
               >
-                <div className={firstPartState}>{cardData.frontText}</div>
-                <div className={secondPartState}>{cardData.backText}</div>
+                <div className={firstPartState}>{cardData.wTranslation}</div>
+                <div className={secondPartState}>{cardData.theWord}</div>
               </div>
             )
-            // <LeftCard back={cardData.backText} front={cardData.frontText} key={index} />
+            // <LeftCard back={cardData.theWord} front={cardData.wTranslation} key={index} />
           )}
         </div>
         <div className="b_words flex_wrap">
@@ -115,8 +116,8 @@ export default function Dictionary(props) {
               }
               id={cardData.id}
               onClick={() => {
-                rightBack.current = cardData.backText;
-                backTextId.current = index;
+                rightBack.current = cardData.theWord;
+                theWordId.current = index;
                 console.log(rightBack.current, leftBack.current);
                 setClickedRightCardId(cardData.id);
                 if (leftBack.current === rightBack.current) {
@@ -124,7 +125,7 @@ export default function Dictionary(props) {
                   props.setTries(props.tries + 1);
                   wonWords.current.push(cardData);
                   shuffledDataForLeft.splice(frontTextId.current, 1);
-                  shuffledDataForRight.splice(backTextId.current, 1);
+                  shuffledDataForRight.splice(theWordId.current, 1);
                   rightBack.current = null;
                   leftBack.current = null;
                   if (isSecond) {
@@ -141,52 +142,26 @@ export default function Dictionary(props) {
               }}
             >
               <div>
-                <div className={thirdPartState}>{cardData.backText}</div>
+                <div className={thirdPartState}>{cardData.theWord}</div>
               </div>
-              {/* <RightCard isVisible={visibleBackIndex} back={cardData.backText} index={index} onClick={whenBackCardClicked} key={index} /> */}
+              {/* <RightCard isVisible={visibleBackIndex} back={cardData.theWord} index={index} onClick={whenBackCardClicked} key={index} /> */}
             </div>
           ))}
         </div>
       </div>
       <div className="end_game">
-        {/* <div className="sentences">
-          {sentences.map((sentence, index) => {
-            return (
-              <div
-                className={
-                  clickedSentence === index
-                    ? "full_sentence clicked_Sentence"
-                    : "full_sentence"
-                }
-                onClick={() => {
-                  console.log(sentence.translation);
-                  setClickedSentence(index);
-                }}
-              >
-                {sentence.translation}
-              </div>
-            );
-          })}
-        </div> */}
         <div className="won_words">
           {wonWords.current.map((wonWord, index) => (
             <div className="won_word">
-              <div>{wonWord.frontText}</div> - <div>{wonWord.backText}</div>
-              {/* <div className="expl">განმარტება</div> */}
+              <div>{wonWord.wTranslation}</div> - <div>{wonWord.theWord}</div>
             </div>
           ))}
         </div>
         <div className="next_game">
           {shuffledDataForLeft.length === 0 ? (
-            // <div className="next">შემდეგი თამაში</div>
             <button onClick={() => setPartOfGame(2)}>შემდეგი ეტაპი</button>
           ) : (
-            // : <div className="">თამაში</div>}
-            console.log(
-              wonWords.length,
-              wonWords.length === 2,
-              startingWords.current
-            )
+            console.log(wonWords.length, wonWords.length === 2)
           )}
         </div>
       </div>

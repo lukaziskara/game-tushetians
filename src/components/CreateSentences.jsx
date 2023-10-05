@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 export default function CreateSentences(props) {
+  console.log(props);
   const { point, setPoint, tries, setTries, wordsForCards, setPartOfGame } =
     props;
   // const cardsData = props.cardsData;
@@ -307,8 +308,8 @@ export default function CreateSentences(props) {
                     chosenPlaceHolder.current,
                     wordsForCS[sentenceToFill].length,
                     chosenPlaceHolderId.current[sentenceToFill],
-                    "დაემატა",
-                    [1, 2] === [1, 2]
+                    "დაემატა"
+                    // {[1, 2] == [1, 2]}
                   );
                   chosenPlaceHolderId.current[sentenceToFill]++;
                   // chosenPlaceHolderId.current[clickedSentence] + 1;
