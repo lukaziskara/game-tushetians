@@ -33,13 +33,16 @@ function Game(props) {
     secondPartState: "second_visible",
     thirdPartState: "third_visible",
   });
-  
+
   // შემთხვევითად ამოირჩევა წინადადებები ყოველი თავიდან და დაიშლება ობიექტებად, რომლებიც wordsForCards მასივში მიმდევრობით ჩალაგდება
   const iSentence = useRef();
   const marksAmount = useRef(0);
-  
-  const {sentencesData,wordsFromSentences,wordsfromLexicon} = useMemo(()=> getData(4,1),[])
-  console.log(sentencesData,wordsFromSentences,wordsfromLexicon);
+
+  const { sentencesData, wordsFromSentences, wordsfromLexicon } = useMemo(
+    () => getData(4, 1),
+    []
+  );
+  console.log(sentencesData, wordsFromSentences, wordsfromLexicon);
   // ძველი ნაწილი
   // const wordsForCards = useMemo(() => {
   //   const words = [];
